@@ -30,7 +30,7 @@ const TestimonialsSection = () => {
       id: 1,
       name: 'Sophie Durand',
       position: 'CEO, Luxury Fashion',
-      quote: 'DIGiTHOM a complètement transformé notre image de marque avec un design sophistiqué qui reflète parfaitement notre positionnement haut de gamme. Leur sens du détail et leur créativité ont dépassé toutes nos attentes.',
+      quote: "DIGiTHOM a complètement transformé notre image de marque avec un design sophistiqué qui reflète parfaitement notre positionnement haut de gamme. Leur sens du détail et leur créativité ont dépassé toutes nos attentes.",
       rating: 5,
       avatar: '/placeholder.svg'
     },
@@ -38,7 +38,7 @@ const TestimonialsSection = () => {
       id: 2,
       name: 'Alexandre Martin',
       position: 'Directeur Marketing, Tech Innovations',
-      quote: 'Notre collaboration avec DIGiTHOM a été exceptionnelle. Leur équipe a su capturer l'essence de notre entreprise et la transformer en une identité visuelle impactante et mémorable qui nous démarque clairement sur le marché.',
+      quote: "Notre collaboration avec DIGiTHOM a été exceptionnelle. Leur équipe a su capturer l'essence de notre entreprise et la transformer en une identité visuelle impactante et mémorable qui nous démarque clairement sur le marché.",
       rating: 5,
       avatar: '/placeholder.svg'
     },
@@ -46,7 +46,7 @@ const TestimonialsSection = () => {
       id: 3,
       name: 'Marie Laurent',
       position: 'Fondatrice, Studio Créatif',
-      quote: 'Je recommande vivement DIGiTHOM pour leur approche unique et leur capacité à créer des designs à la fois esthétiques et fonctionnels. Leur travail sur notre site web a considérablement amélioré notre taux de conversion.',
+      quote: "Je recommande vivement DIGiTHOM pour leur approche unique et leur capacité à créer des designs à la fois esthétiques et fonctionnels. Leur travail sur notre site web a considérablement amélioré notre taux de conversion.",
       rating: 4,
       avatar: '/placeholder.svg'
     }

@@ -40,7 +40,7 @@ const PortfolioSection = () => {
       title: 'Refonte Identité Marque',
       category: 'branding',
       image: '/placeholder.svg',
-      description: 'Modernisation complète de l'identité visuelle d'une marque de luxe, incluant logo, charte graphique et supports de communication.',
+      description: "Modernisation complète de l'identité visuelle d'une marque de luxe, incluant logo, charte graphique et supports de communication.",
       client: 'Luxury Brand Inc.',
       year: '2023'
     },
@@ -49,7 +49,7 @@ const PortfolioSection = () => {
       title: 'Site E-commerce Premium',
       category: 'web',
       image: '/placeholder.svg',
-      description: 'Conception d'une plateforme e-commerce haut de gamme avec une expérience utilisateur immersive et des parcours d'achat optimisés.',
+      description: "Conception d'une plateforme e-commerce haut de gamme avec une expérience utilisateur immersive et des parcours d'achat optimisés.",
       client: 'Premium Shop',
       year: '2022'
     },
@@ -58,7 +58,7 @@ const PortfolioSection = () => {
       title: 'Application Mobile Finance',
       category: 'mobile',
       image: '/placeholder.svg',
-      description: 'Design UI/UX d'une application mobile de gestion financière avec interfaces intuitives et visualisations de données avancées.',
+      description: "Design UI/UX d'une application mobile de gestion financière avec interfaces intuitives et visualisations de données avancées.",
       client: 'FinTech Solutions',
       year: '2022'
     },
@@ -67,7 +67,7 @@ const PortfolioSection = () => {
       title: 'Brochure Produit Premium',
       category: 'print',
       image: '/placeholder.svg',
-      description: 'Création d'une brochure luxueuse présentant une collection exclusive, avec finitions dorées et mise en page sophistiquée.',
+      description: "Création d'une brochure luxueuse présentant une collection exclusive, avec finitions dorées et mise en page sophistiquée.",
       client: 'Exclusive Collections',
       year: '2021'
     },
@@ -76,7 +76,7 @@ const PortfolioSection = () => {
       title: 'Identité Restaurant Gastronomique',
       category: 'branding',
       image: '/placeholder.svg',
-      description: 'Développement complet de l'identité visuelle d'un restaurant étoilé, de la signalétique aux menus et cartes de visite.',
+      description: "Développement complet de l'identité visuelle d'un restaurant étoilé, de la signalétique aux menus et cartes de visite.",
       client: 'Gourmet Élégance',
       year: '2021'
     },
@@ -85,7 +85,7 @@ const PortfolioSection = () => {
       title: 'Landing Page Événement',
       category: 'web',
       image: '/placeholder.svg',
-      description: 'Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.',
+      description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
       client: 'Exclusive Event Co.',
       year: '2020'
     }
