@@ -38,7 +38,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold gold-gradient-text">DIGiTHOM</span>
+            <a href="#home" className="flex items-center">
+              <img 
+                src="/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png" 
+                alt="DIGiTHOM Logo" 
+                className="h-10 w-auto mr-2"
+              />
+              <span className="text-2xl font-bold gold-gradient-text hidden md:block">DIGiTHOM</span>
+            </a>
           </div>
           
           <div className="hidden md:block">
