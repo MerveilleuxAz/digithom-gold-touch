@@ -6,32 +6,32 @@
 @layer base {
   :root {
     --background: 0 0% 5%;
-    --foreground: 45 80% 60%;
+    --foreground: 30 100% 45%;
 
     --card: 0 0% 8%;
-    --card-foreground: 45 80% 60%;
+    --card-foreground: 30 100% 45%;
 
     --popover: 0 0% 10%;
-    --popover-foreground: 45 80% 65%;
+    --popover-foreground: 30 100% 50%;
 
-    --primary: 45 85% 50%;
+    --primary: 30 100% 45%;
     --primary-foreground: 0 0% 10%;
 
-    --secondary: 30 70% 60%;
+    --secondary: 25 90% 50%;
     --secondary-foreground: 0 0% 10%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 45 60% 65%;
+    --muted-foreground: 30 80% 60%;
 
-    --accent: 45 70% 50%;
+    --accent: 30 90% 45%;
     --accent-foreground: 0 0% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 45 60% 30%;
-    --input: 45 60% 20%;
-    --ring: 45 70% 50%;
+    --border: 30 70% 30%;
+    --input: 30 70% 20%;
+    --ring: 30 80% 45%;
 
     --radius: 0.5rem;
 
@@ -56,7 +56,7 @@
     scroll-behavior: smooth;
   }
   
-  /* Gold text effect */
+  /* Gold text effect - maintenant en orange E47E01 */
   .gold-gradient-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-400 animate-text-shimmer;
     background-size: 200% auto;
@@ -67,9 +67,9 @@
     @apply bg-black/30 backdrop-blur-lg border border-gold-700/20 shadow-xl;
   }
   
-  /* Gold button */
+  /* Gold button - maintenant en orange E47E01 */
   .gold-button {
-    @apply relative overflow-hidden bg-gradient-to-r from-gold-600 to-gold-400 text-black px-6 py-3 rounded-md font-medium transition-all duration-300 hover:shadow-[0_0_15px_5px_rgba(212,175,55,0.3)] hover:from-gold-500 hover:to-gold-300;
+    @apply relative overflow-hidden bg-gradient-to-r from-gold-600 to-gold-400 text-black px-6 py-3 rounded-md font-medium transition-all duration-300 hover:shadow-[0_0_15px_5px_rgba(228,126,1,0.3)] hover:from-gold-500 hover:to-gold-300;
   }
   
   .gold-button:hover::after {
@@ -102,7 +102,7 @@
   
   /* Interactive hover effect */
   .interactive-item {
-    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(212,175,55,0.5)];
+    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(228,126,1,0.5)];
   }
   
   /* Portfolio item */
