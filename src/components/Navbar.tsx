@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -17,6 +17,7 @@ import {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -26,6 +27,17 @@ const Navbar = () => {
       } else {
         setIsScrolled(false);
       }
+
+      // Determine active section based on scroll position
+      const sections = document.querySelectorAll('section[id]');
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionId = section.getAttribute('id');
+        
+        if (sectionTop < 100 && sectionTop >= -100 && sectionId) {
+          setActiveSection(sectionId);
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -64,26 +76,32 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-1">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {navLinks.map((link) => (
-                    <NavigationMenuItem key={link.name}>
-                      <NavigationMenuLink 
-                        href={link.href}
-                        className={cn(
-                          "px-3 py-2 text-gold-300 hover:text-gold-500 transition-colors duration-200 relative group",
-                          "after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gold-500 after:bottom-0 after:left-0",
-                          "after:transition-all after:duration-300 hover:after:w-full"
-                        )}
-                      >
-                        {link.name}
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  ))}
+                  {navLinks.map((link) => {
+                    const isActive = activeSection === link.href.substring(1);
+                    return (
+                      <NavigationMenuItem key={link.name}>
+                        <NavigationMenuLink 
+                          href={link.href}
+                          className={cn(
+                            "px-3 py-2 transition-colors duration-200 relative group",
+                            "after:content-[''] after:absolute after:h-0.5 after:bg-gold-500 after:bottom-0 after:left-0",
+                            "after:transition-all after:duration-300 hover:after:w-full",
+                            isActive 
+                              ? "text-white after:w-full" 
+                              : "text-gold-300 hover:text-gold-500 after:w-0"
+                          )}
+                        >
+                          {link.name}
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    );
+                  })}
                 </NavigationMenuList>
               </NavigationMenu>
               
               <Button 
                 variant="ghost" 
-                className="ml-4 bg-gold-500/10 text-gold-400 hover:bg-gold-500/20 hover:text-gold-300 border border-gold-500/30"
+                className="ml-4 bg-gold-500/10 text-white hover:bg-gold-500/20 hover:text-white border border-gold-500/30"
               >
                 Demander un devis
               </Button>
@@ -92,7 +110,7 @@ const Navbar = () => {
             <div className="md:hidden">
               <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gold-500 hover:text-gold-300 transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+                className="text-gold-500 hover:text-white transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
                 aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -106,20 +124,28 @@ const Navbar = () => {
       {isOpen && isMobile && (
         <div className="md:hidden animate-fade-in glass-panel">
           <div className="px-4 pt-2 pb-4 space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gold-300 hover:text-gold-500 block px-3 py-3 text-base font-medium border-b border-gold-900/30 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={cn(
+                    "block px-3 py-3 text-base font-medium border-b border-gold-900/30 transition-all duration-200",
+                    isActive 
+                      ? "text-white border-l-4 border-l-gold-500 pl-4" 
+                      : "text-gold-300 hover:text-gold-500"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             <div className="pt-2">
               <Button 
                 variant="outline" 
-                className="w-full mt-2 border-gold-500/50 text-gold-400 hover:bg-gold-500/10"
+                className="w-full mt-2 border-gold-500/50 text-white hover:bg-gold-500/10"
               >
                 Demander un devis
               </Button>
