@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Monitor, PenTool, Layout, Smartphone, RotateCw, ChevronRight } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Monitor, PenTool, Layout, Smartphone, ChevronRight } from 'lucide-react';
 
 const ServicesSection = () => {
   useEffect(() => {
@@ -74,17 +74,6 @@ const ServicesSection = () => {
     }
   ];
 
-  // State to track which card is flipped
-  const [flippedCard, setFlippedCard] = useState<number | null>(null);
-
-  const handleCardFlip = (index: number) => {
-    if (flippedCard === index) {
-      setFlippedCard(null);
-    } else {
-      setFlippedCard(index);
-    }
-  };
-
   return (
     <section id="services" className="py-20 relative overflow-hidden bg-black/80">
       {/* Decorative elements */}
@@ -99,7 +88,6 @@ const ServicesSection = () => {
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
           <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Des solutions créatives sur mesure pour donner vie à vos projets les plus ambitieux.
-            Cliquez sur un service pour découvrir les détails.
           </p>
         </div>
         
@@ -107,44 +95,22 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index}
-              className={`animate-on-scroll opacity-0 h-[400px] relative perspective-1000 cursor-pointer transition-all duration-500 ${
-                flippedCard === index ? 'transform-style-3d' : ''
-              }  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]`}
+              className="animate-on-scroll opacity-0 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center h-[400px]"
               style={{ animationDelay: `${index * 0.1}s` }}
-              // onClick={() => handleCardFlip(index)}
             >
-              <div 
-                className={`absolute inset-0 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 backface-visibility-hidden ${
-                  flippedCard === index ? 'rotated-card flipped' : 'rotated-card'
-                }`}
-              >
-                <div className="mb-6 bg-gold-500/10 p-4 rounded-full">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gold-300 mb-3">{service.title}</h3>
-                <p className="text-sm text-white mb-6">{service.description}</p>
-                {/* <button className="mt-auto flex items-center gap-1 text-gold-400 hover:text-gold-300 transition-colors">
-                  <span>Découvrir</span>
-                  <RotateCw size={14} />
-                </button> */}
-              </div>
+              <div className="mb-6 bg-gold-500/10 p-4 rounded-full">{service.icon}</div>
+              <h3 className="text-xl font-bold text-gold-300 mb-3">{service.title}</h3>
+              <p className="text-sm text-gold-100/70 mb-4">{service.description}</p>
               
-              <div 
-                className={`absolute inset-0 glass-panel rounded-xl p-6 flex flex-col backface-visibility-hidden back-content transition-all duration-500 ${
-                  flippedCard === index ? 'rotated-card flipped' : 'rotated-card'
-                }`}
-              >
-                <h3 className="text-xl font-bold text-gold-300 mb-6 text-center">{service.title}</h3>
-                <ul className="space-y-3 flex-1">
-                  {service.details.map((detail, idx) => (
+              <div className="mt-4">
+                <ul className="space-y-2">
+                  {service.details.slice(0, 3).map((detail, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <ChevronRight size={16} className="text-gold-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm text-gold-100/90">{detail}</span>
+                      <ChevronRight size={14} className="text-gold-500 mt-1 flex-shrink-0" />
+                      <span className="text-xs text-gold-100/80 text-left">{detail}</span>
                     </li>
                   ))}
                 </ul>
-                <button className="mt-6 self-center flex items-center gap-1 text-gold-400 hover:text-gold-300 transition-colors">
-                  <span>Retourner</span>
-                  <RotateCw size={14} />
-                </button>
               </div>
             </div>
           ))}
