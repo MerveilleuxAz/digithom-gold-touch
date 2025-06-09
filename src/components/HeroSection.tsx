@@ -43,14 +43,14 @@ const HeroSection = () => {
             <span className="gold-gradient-text">Designer, c'est dessiner à dessein.</span>
           </h1>
           
-          <p className="animate-on-scroll opacity-0 text-lg text-gold-100/80 max-w-lg">
+          <p className="animate-on-scroll opacity-0 text-lg text-white max-w-lg">
             Une approche créative et stratégique pour transformer vos idées en expériences visuelles mémorables.
           </p>
           
           <div className="animate-on-scroll opacity-0 pt-4">
-            <button className="gold-button group">
-              En Savoir Plus
-              <ArrowRight className="ml-2 inline-block transition-transform group-hover:translate-x-1" size={18} />
+            <button className="gold-button text-white group">
+              En savoir plus
+              {/* <ArrowRight className="ml-2 inline-block transition-transform group-hover:translate-x-1" size={18} /> */}
             </button>
           </div>
         </div>
@@ -60,13 +60,13 @@ const HeroSection = () => {
           <div className="relative animate-on-scroll opacity-0">
             <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gold-500/50 animate-pulse-gold">
               <img 
-                src="/placeholder.svg" 
+                src="/lovable-uploads/hero.jpg" 
                 alt="DIGiTHOM Portrait" 
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-black rounded-full flex items-center justify-center border border-gold-500/30">
-              <span className="text-xs text-gold-400 font-semibold">DEPUIS<br/>2015</span>
+              <span className="text-xs text-gold-400 font-semibold">DEPUIS<br/>2020</span>
             </div>
           </div>
         </div>

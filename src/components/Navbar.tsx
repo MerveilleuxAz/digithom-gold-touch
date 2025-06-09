@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -20,29 +19,48 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+  // Optimisation de la fonction handleScroll avec useCallback
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    setIsScrolled(scrollY > 50);
 
-      // Determine active section based on scroll position
+    // Utilisation de requestAnimationFrame pour optimiser les performances
+    requestAnimationFrame(() => {
       const sections = document.querySelectorAll('section[id]');
+      let currentSection = 'home';
+      let minDistance = Infinity;
+
       sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
+        const rect = section.getBoundingClientRect();
         const sectionId = section.getAttribute('id');
         
-        if (sectionTop < 100 && sectionTop >= -100 && sectionId) {
-          setActiveSection(sectionId);
+        // Calcul de la distance entre le haut de la section et le haut de la fenêtre
+        const distance = Math.abs(rect.top);
+        
+        // Si la section est visible dans la fenêtre et plus proche que la précédente
+        if (rect.top <= 100 && distance < minDistance && sectionId) {
+          minDistance = distance;
+          currentSection = sectionId;
         }
       });
-    };
 
+      setActiveSection(currentSection);
+    });
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
+
+  // Fermeture du menu mobile lors du défilement
+  useEffect(() => {
+    if (isOpen) {
+      const handleScrollClose = () => setIsOpen(false);
+      window.addEventListener('scroll', handleScrollClose);
+      return () => window.removeEventListener('scroll', handleScrollClose);
+    }
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'Accueil', href: '#home' },
@@ -55,18 +73,24 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={cn(
-      'fixed top-0 w-full z-50 transition-all duration-300',
-      isScrolled ? 'bg-black/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
-    )}>
+    <nav 
+      className={cn(
+        'fixed top-0 w-full z-50 transition-all duration-300',
+        isScrolled ? 'bg-black/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
+      )}
+      role="navigation"
+      aria-label="Navigation principale"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
-            <a href="#home" className="flex items-center">
+            <a href="#home" className="flex items-center" aria-label="Retour à l'accueil">
               <img 
                 src="/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png" 
                 alt="DIGiTHOM Logo" 
                 className="h-12 w-auto mr-2"
+                width="48"
+                height="48"
               />
               <span className="text-2xl font-bold gold-gradient-text hidden md:block">DIGiTHOM</span>
             </a>
@@ -87,9 +111,10 @@ const Navbar = () => {
                             "after:content-[''] after:absolute after:h-0.5 after:bg-gold-500 after:bottom-0 after:left-0",
                             "after:transition-all after:duration-300 hover:after:w-full",
                             isActive 
-                              ? "text-white after:w-full" 
+                              ? "text-gold-400 after:w-full" 
                               : "text-gold-300 hover:text-gold-500 after:w-0"
                           )}
+                          aria-current={isActive ? 'page' : undefined}
                         >
                           {link.name}
                         </NavigationMenuLink>
@@ -101,7 +126,8 @@ const Navbar = () => {
               
               <Button 
                 variant="ghost" 
-                className="ml-4 bg-gold-500/10 text-white hover:bg-gold-500/20 hover:text-white border border-gold-500/30"
+                className="ml-4 bg-gold-500/10 text-gold-400 font-semibold group-hover:translate-x-1 hover:text-gold-400 border border-gold-500/30"
+                aria-label="Demander un devis"
               >
                 Demander un devis
               </Button>
@@ -110,8 +136,10 @@ const Navbar = () => {
             <div className="md:hidden">
               <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gold-500 hover:text-white transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+                className="text-gold-500 hover:text-gold-400 transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
                 aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -122,7 +150,12 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && isMobile && (
-        <div className="md:hidden animate-fade-in glass-panel">
+        <div 
+          id="mobile-menu"
+          className="md:hidden animate-fade-in glass-panel"
+          role="menu"
+          aria-label="Menu mobile"
+        >
           <div className="px-4 pt-2 pb-4 space-y-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
@@ -133,10 +166,12 @@ const Navbar = () => {
                   className={cn(
                     "block px-3 py-3 text-base font-medium border-b border-gold-900/30 transition-all duration-200",
                     isActive 
-                      ? "text-white border-l-4 border-l-gold-500 pl-4" 
+                      ? "text-gold-400 border-l-4 border-l-gold-500 pl-4" 
                       : "text-gold-300 hover:text-gold-500"
                   )}
                   onClick={() => setIsOpen(false)}
+                  role="menuitem"
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {link.name}
                 </a>
@@ -145,7 +180,8 @@ const Navbar = () => {
             <div className="pt-2">
               <Button 
                 variant="outline" 
-                className="w-full mt-2 border-gold-500/50 text-white hover:bg-gold-500/10"
+                className="w-full mt-2 border-gold-500/50 text-gold hover:bg-gold-500/10"
+                aria-label="Demander un devis"
               >
                 Demander un devis
               </Button>

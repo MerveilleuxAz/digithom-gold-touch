@@ -32,7 +32,7 @@ const TestimonialsSection = () => {
       position: 'CEO, Luxury Fashion',
       quote: "DIGiTHOM a complètement transformé notre image de marque avec un design sophistiqué qui reflète parfaitement notre positionnement haut de gamme. Leur sens du détail et leur créativité ont dépassé toutes nos attentes.",
       rating: 5,
-      avatar: '/placeholder.svg'
+      avatar: '/lovable-uploads/avatar.jpg'
     },
     {
       id: 2,
@@ -40,7 +40,7 @@ const TestimonialsSection = () => {
       position: 'Directeur Marketing, Tech Innovations',
       quote: "Notre collaboration avec DIGiTHOM a été exceptionnelle. Leur équipe a su capturer l'essence de notre entreprise et la transformer en une identité visuelle impactante et mémorable qui nous démarque clairement sur le marché.",
       rating: 5,
-      avatar: '/placeholder.svg'
+      avatar: '/lovable-uploads/avatar.jpg'
     },
     {
       id: 3,
@@ -48,7 +48,7 @@ const TestimonialsSection = () => {
       position: 'Fondatrice, Studio Créatif',
       quote: "Je recommande vivement DIGiTHOM pour leur approche unique et leur capacité à créer des designs à la fois esthétiques et fonctionnels. Leur travail sur notre site web a considérablement amélioré notre taux de conversion.",
       rating: 4,
-      avatar: '/placeholder.svg'
+      avatar: '/lovable-uploads/avatar.jpg'
     }
   ];
 
@@ -81,7 +81,7 @@ const TestimonialsSection = () => {
             <span className="gold-gradient-text">Témoignages Clients</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-gold-100/80">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Découvrez ce que nos clients disent de notre travail et de notre collaboration.
           </p>
         </div>
@@ -122,7 +122,7 @@ const TestimonialsSection = () => {
                     </div>
                     <div className="md:w-3/4 relative">
                       <Quote className="absolute -top-6 -left-6 text-gold-500/20" size={60} />
-                      <p className="text-gold-100/90 italic text-lg relative z-10">
+                      <p className="text-white italic text-lg relative z-10">
                         "{testimonial.quote}"
                       </p>
                     </div>

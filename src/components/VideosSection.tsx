@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Play, Maximize, X } from 'lucide-react';
 
@@ -14,6 +13,30 @@ interface Video {
 const VideosSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   
+  // Fonction pour convertir l'URL YouTube en URL d'intégration
+  const getEmbedUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
+      return `https://www.youtube.com/embed/${videoId}`;
+    } catch (error) {
+      console.error('Invalid YouTube URL:', error);
+      return url;
+    }
+  };
+
+  // Fonction pour obtenir l'URL de la miniature YouTube
+  const getThumbnailUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    } catch (error) {
+      console.error('Invalid YouTube URL:', error);
+      return '/placeholder.svg';
+    }
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,24 +62,24 @@ const VideosSection = () => {
       id: 1,
       title: "Processus créatif",
       description: "Découvrez notre approche unique du design et comment nous transformons vos idées en réalités visuelles captivantes.",
-      thumbnail: "/placeholder.svg",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
+      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
       duration: "2:45"
     },
     {
       id: 2,
       title: "Transformation de marque",
       description: "Étude de cas: comment nous avons revitalisé l'identité visuelle d'une entreprise traditionnelle pour la rendre contemporaine.",
-      thumbnail: "/placeholder.svg",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
+      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
       duration: "4:12"
     },
     {
       id: 3,
       title: "Design et expérience utilisateur",
       description: "L'importance de l'UX dans le design d'interface et comment nous créons des expériences mémorables.",
-      thumbnail: "/placeholder.svg",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
+      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
       duration: "3:30"
     }
   ];
@@ -73,7 +96,7 @@ const VideosSection = () => {
             <span className="gold-gradient-text">Vidéos & Showreel</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-gold-100/80">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Découvrez notre travail en mouvement à travers des vidéos qui illustrent notre processus créatif et nos réalisations.
           </p>
         </div>
@@ -105,7 +128,7 @@ const VideosSection = () => {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gold-300 mb-2">{video.title}</h3>
-                <p className="text-gold-100/70 text-sm mb-4">{video.description}</p>
+                <p className="text-white text-sm mb-4">{video.description}</p>
                 <button 
                   className="text-gold-400 hover:text-gold-300 text-sm flex items-center gap-2 transition-colors"
                   onClick={() => setSelectedVideo(video)}
@@ -131,7 +154,7 @@ const VideosSection = () => {
               
               <div className="relative aspect-video">
                 <iframe 
-                  src={selectedVideo.videoUrl} 
+                  src={getEmbedUrl(selectedVideo.videoUrl)} 
                   title={selectedVideo.title} 
                   className="absolute inset-0 w-full h-full rounded-lg"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -141,7 +164,7 @@ const VideosSection = () => {
               
               <div className="p-4">
                 <h3 className="text-xl font-bold text-gold-300">{selectedVideo.title}</h3>
-                <p className="text-gold-100/80 text-sm mt-2">{selectedVideo.description}</p>
+                <p className="text-white text-sm mt-2">{selectedVideo.description}</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,23 @@
-
 import React, { useState, useEffect } from 'react';
-import { Send, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+
+// Composant TikTokIcon personnalisé
+const TikTokIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -63,28 +79,28 @@ const ContactSection = () => {
     {
       icon: <Mail size={20} className="text-gold-500" />,
       title: 'Email',
-      value: 'contact@digithom.com',
-      link: 'mailto:contact@digithom.com'
+      value: 'digithom229@gmail.com',
+      link: 'mailto:digithom229@gmail.com'
     },
     {
       icon: <Phone size={20} className="text-gold-500" />,
       title: 'Téléphone',
-      value: '+33 6 12 34 56 78',
-      link: 'tel:+33612345678'
+      value: '+229 41 51 53 03',
+      link: 'tel:+22941515303'
     },
     {
       icon: <MapPin size={20} className="text-gold-500" />,
       title: 'Adresse',
-      value: 'Paris, France',
-      link: 'https://maps.google.com/?q=Paris,France'
+      value: 'Abomey-Calavi, Bénin',
+      link: 'https://maps.google.com/?q=Abomey-Calavi,Benin'
     }
   ];
   
   const socialLinks = [
     { icon: <Facebook size={18} />, name: 'Facebook', link: '#' },
+    { icon: <TikTokIcon size={18} />, name: 'TikTok', link: '#' },
     { icon: <Instagram size={18} />, name: 'Instagram', link: '#' },
-    { icon: <Linkedin size={18} />, name: 'LinkedIn', link: '#' },
-    { icon: <Twitter size={18} />, name: 'Twitter', link: '#' }
+    { icon: <Linkedin size={18} />, name: 'LinkedIn', link: '#' }   
   ];
 
   return (
@@ -99,7 +115,7 @@ const ContactSection = () => {
             <span className="gold-gradient-text">Contactez-Nous</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-gold-100/80">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Discutons de votre projet et voyons comment nous pouvons vous aider à le concrétiser.
           </p>
         </div>
@@ -122,7 +138,7 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-gold-100"
+                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
                   />
                 </div>
                 
@@ -137,13 +153,13 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-gold-100"
+                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
                   />
                 </div>
                 
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-gold-400 text-sm">
-                    Sujet
+                    Objet
                   </label>
                   <input
                     id="subject"
@@ -152,7 +168,7 @@ const ContactSection = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-gold-100"
+                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
                   />
                 </div>
                 
@@ -167,20 +183,20 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-gold-100 resize-none"
+                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white resize-none"
                   />
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="gold-button w-full flex items-center justify-center gap-2"
+                  className="gold-button text-white w-full flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     'Envoi en cours...'
                   ) : (
                     <>
-                      <span>Envoyer le Message</span>
+                      <span>Envoyer</span>
                       <Send size={16} />
                     </>
                   )}
@@ -206,7 +222,7 @@ const ContactSection = () => {
                     <div className="bg-muted p-3 rounded-full">{info.icon}</div>
                     <div>
                       <h4 className="text-gold-400 font-medium">{info.title}</h4>
-                      <p className="text-gold-100">{info.value}</p>
+                      <p className="text-white">{info.value}</p>
                     </div>
                   </a>
                 ))}
@@ -237,20 +253,20 @@ const ContactSection = () => {
               <div className="space-y-3 flex-1">
                 <div className="flex justify-between">
                   <span className="text-gold-400">Lundi - Vendredi</span>
-                  <span className="text-gold-100">9:00 - 18:00</span>
+                  <span className="text-white">9:00 - 18:00</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gold-400">Samedi</span>
-                  <span className="text-gold-100">10:00 - 15:00</span>
+                  <span className="text-white">10:00 - 15:00</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gold-400">Dimanche</span>
-                  <span className="text-gold-100">Fermé</span>
+                  <span className="text-white">Fermé</span>
                 </div>
               </div>
               
               <div className="mt-auto pt-6">
-                <p className="text-gold-100/70 text-sm italic">
+                <p className="text-white/70 text-sm italic">
                   N'hésitez pas à nous contacter pour discuter de votre projet ou pour prendre rendez-vous.
                 </p>
               </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 
@@ -24,7 +23,7 @@ const PortfolioSection = () => {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, []);
+  }, [selectedCategory]);
 
   const categories = [
     { id: 'all', name: 'Tous' },
@@ -39,7 +38,7 @@ const PortfolioSection = () => {
       id: 1,
       title: 'Refonte Identité Marque',
       category: 'branding',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Modernisation complète de l'identité visuelle d'une marque de luxe, incluant logo, charte graphique et supports de communication.",
       client: 'Luxury Brand Inc.',
       year: '2023'
@@ -48,7 +47,7 @@ const PortfolioSection = () => {
       id: 2,
       title: 'Site E-commerce Premium',
       category: 'web',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Conception d'une plateforme e-commerce haut de gamme avec une expérience utilisateur immersive et des parcours d'achat optimisés.",
       client: 'Premium Shop',
       year: '2022'
@@ -57,7 +56,7 @@ const PortfolioSection = () => {
       id: 3,
       title: 'Application Mobile Finance',
       category: 'mobile',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Design UI/UX d'une application mobile de gestion financière avec interfaces intuitives et visualisations de données avancées.",
       client: 'FinTech Solutions',
       year: '2022'
@@ -66,7 +65,7 @@ const PortfolioSection = () => {
       id: 4,
       title: 'Brochure Produit Premium',
       category: 'print',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Création d'une brochure luxueuse présentant une collection exclusive, avec finitions dorées et mise en page sophistiquée.",
       client: 'Exclusive Collections',
       year: '2021'
@@ -75,7 +74,7 @@ const PortfolioSection = () => {
       id: 5,
       title: 'Identité Restaurant Gastronomique',
       category: 'branding',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Développement complet de l'identité visuelle d'un restaurant étoilé, de la signalétique aux menus et cartes de visite.",
       client: 'Gourmet Élégance',
       year: '2021'
@@ -84,7 +83,7 @@ const PortfolioSection = () => {
       id: 6,
       title: 'Landing Page Événement',
       category: 'web',
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/picture.jpg',
       description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
       client: 'Exclusive Event Co.',
       year: '2020'
@@ -94,6 +93,16 @@ const PortfolioSection = () => {
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
     : projects.filter(project => project.category === selectedCategory);
+
+  const handleCategoryChange = (categoryId: string) => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => {
+      el.classList.remove('animate-fade-in');
+      el.classList.add('opacity-0');
+    });
+    
+    setSelectedCategory(categoryId);
+  };
 
   return (
     <section id="portfolio" className="py-20 relative overflow-hidden">
@@ -107,7 +116,7 @@ const PortfolioSection = () => {
             <span className="gold-gradient-text">Réalisations & Portfolio</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-gold-100/80">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Découvrez quelques-unes de nos créations qui transforment des idées en expériences visuelles exceptionnelles.
           </p>
         </div>
@@ -122,7 +131,7 @@ const PortfolioSection = () => {
                   ? 'bg-gold-500 text-black'
                   : 'bg-muted text-gold-300 hover:bg-gold-500/20'
               }`}
-              onClick={() => setSelectedCategory(category.id)}
+              onClick={() => handleCategoryChange(category.id)}
             >
               {category.name}
             </button>
@@ -145,7 +154,7 @@ const PortfolioSection = () => {
               />
               <div className="portfolio-item-overlay p-6 flex flex-col items-center justify-center">
                 <h3 className="text-xl font-bold text-gold-300 mb-2">{project.title}</h3>
-                <p className="text-sm text-gold-100/80 mb-4">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</p>
+                <p className="text-sm text-white mb-4">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</p>
                 <button className="gold-button text-sm py-2 px-4">
                   Voir le Projet
                 </button>
@@ -176,19 +185,19 @@ const PortfolioSection = () => {
                   </div>
                   <div className="md:w-1/2 space-y-4">
                     <h3 className="text-2xl font-bold text-gold-300">{project.title}</h3>
-                    <p className="text-gold-100/80">{project.description}</p>
+                    <p className="text-white">{project.description}</p>
                     <div className="pt-4 space-y-2">
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Client:</span>
-                        <span className="text-gold-100/90">{project.client}</span>
+                        <span className="text-white">{project.client}</span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Année:</span>
-                        <span className="text-gold-100/90">{project.year}</span>
+                        <span className="text-white">{project.year}</span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Catégorie:</span>
-                        <span className="text-gold-100/90">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</span>
+                        <span className="text-white">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</span>
                       </div>
                     </div>
                     <div className="pt-6">

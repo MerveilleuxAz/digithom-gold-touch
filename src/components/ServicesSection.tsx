@@ -97,7 +97,7 @@ const ServicesSection = () => {
             <span className="gold-gradient-text">Nos Services & Expertises</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-gold-100/80">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
             Des solutions créatives sur mesure pour donner vie à vos projets les plus ambitieux.
             Cliquez sur un service pour découvrir les détails.
           </p>
@@ -109,9 +109,9 @@ const ServicesSection = () => {
               key={index}
               className={`animate-on-scroll opacity-0 h-[400px] relative perspective-1000 cursor-pointer transition-all duration-500 ${
                 flippedCard === index ? 'transform-style-3d' : ''
-              }`}
+              }  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]`}
               style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => handleCardFlip(index)}
+              // onClick={() => handleCardFlip(index)}
             >
               <div 
                 className={`absolute inset-0 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 backface-visibility-hidden ${
@@ -120,11 +120,11 @@ const ServicesSection = () => {
               >
                 <div className="mb-6 bg-gold-500/10 p-4 rounded-full">{service.icon}</div>
                 <h3 className="text-xl font-bold text-gold-300 mb-3">{service.title}</h3>
-                <p className="text-sm text-gold-100/70 mb-6">{service.description}</p>
-                <button className="mt-auto flex items-center gap-1 text-gold-400 hover:text-gold-300 transition-colors">
+                <p className="text-sm text-white mb-6">{service.description}</p>
+                {/* <button className="mt-auto flex items-center gap-1 text-gold-400 hover:text-gold-300 transition-colors">
                   <span>Découvrir</span>
                   <RotateCw size={14} />
-                </button>
+                </button> */}
               </div>
               
               <div 

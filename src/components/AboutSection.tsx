@@ -68,11 +68,11 @@ const AboutSection = () => {
               Passionné par le Design & l'Expérience Utilisateur
             </h3>
             
-            <p className="animate-on-scroll opacity-0 text-gold-100/80">
+            <p className="animate-on-scroll opacity-0 text-white">
               Chez DIGiTHOM, nous créons des designs qui racontent votre histoire. Nous transformons vos idées en expériences visuelles captivantes qui communiquent votre message de manière claire et mémorable.
             </p>
             
-            <p className="animate-on-scroll opacity-0 text-gold-100/80">
+            <p className="animate-on-scroll opacity-0 text-white">
               Notre approche allie esthétique et fonctionnalité pour des créations qui non seulement plaisent à l'œil mais qui répondent également à vos objectifs stratégiques.
             </p>
             
@@ -101,7 +101,7 @@ const AboutSection = () => {
               >
                 <div className="mb-4 bg-gold-500/10 p-3 rounded-full">{item.icon}</div>
                 <h4 className="text-xl font-bold text-gold-300 mb-2">{item.title}</h4>
-                <p className="text-sm text-gold-100/70">{item.description}</p>
+                <p className="text-sm text-white">{item.description}</p>
               </div>
             ))}
           </div>
