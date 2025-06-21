@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Monitor, PenTool, Layout, Smartphone, ChevronRight } from 'lucide-react';
+import { Monitor, PenTool, Layout, Smartphone, ChevronRight, Search, Megaphone, Users, Video } from 'lucide-react';
 
 const ServicesSection = () => {
   useEffect(() => {
@@ -25,51 +25,47 @@ const ServicesSection = () => {
 
   const services = [
     {
-      icon: <PenTool size={32} className="text-gold-400" />,
-      title: "Design Graphique",
-      description: "Création d'identités visuelles uniques, logos, chartes graphiques et supports de communication qui captivent votre audience.",
-      details: [
-        "Identité visuelle & branding",
-        "Conception de logos",
-        "Chartes graphiques complètes",
-        "Supports marketing imprimés",
-        "Illustrations personnalisées"
-      ]
-    },
-    {
       icon: <Monitor size={32} className="text-gold-400" />,
-      title: "Web Design",
-      description: "Des interfaces web élégantes et fonctionnelles qui offrent une expérience utilisateur optimale et valorisent votre présence en ligne.",
+      title: "Marketing et Communication Digitale",
+      description: "Des stratégies digitales complètes pour développer votre présence en ligne et atteindre vos objectifs business.",
       details: [
-        "Sites vitrines professionnels",
-        "E-commerce performants",
-        "Landing pages convertissantes",
-        "Refonte de sites existants",
-        "Intégration responsive"
+        "Animation réseaux sociaux",
+        "Référencement SEO/SEA",
+        "Création site vitrine/e-commerce",
+        "Webdesign (UI/UX)",
+        "Audits techniques & positionnement"
       ]
     },
     {
-      icon: <Smartphone size={32} className="text-gold-400" />,
-      title: "Interface Mobile",
-      description: "Applications mobiles intuitives avec des parcours utilisateurs fluides et des designs attractifs adaptés aux différents appareils.",
+      icon: <Users size={32} className="text-gold-400" />,
+      title: "Branding de Marque",
+      description: "Construction et développement de votre identité de marque pour une position unique sur votre marché.",
       details: [
-        "Design d'applications iOS/Android",
-        "Interfaces intuitives",
-        "Prototypage interactif",
-        "Optimisation UX/UI mobile",
-        "Design système cohérent"
+        "Naming",
+        "Positionnement",
+        "Plateforme de marque",
+        "Audit de marque"
       ]
     },
     {
-      icon: <Layout size={32} className="text-gold-400" />,
-      title: "UX/UI Design",
-      description: "Conception d'expériences utilisateurs fluides et agréables qui engagent vos utilisateurs et les convertissent en clients fidèles.",
+      icon: <PenTool size={32} className="text-gold-400" />,
+      title: "Design de Marque",
+      description: "Création d'identités visuelles cohérentes et mémorables qui reflètent parfaitement votre personnalité de marque.",
       details: [
-        "Audit d'expérience utilisateur",
-        "Wireframing & prototypage",
-        "Tests utilisateurs",
-        "Optimisation des parcours",
-        "Design Systems"
+        "Logo",
+        "Identité visuelle",
+        "Charte graphique et éditoriale",
+        "Typographie"
+      ]
+    },
+    {
+      icon: <Video size={32} className="text-gold-400" />,
+      title: "Production & Médias",
+      description: "Création de contenus visuels et audiovisuels percutants pour tous vos supports de communication.",
+      details: [
+        "Motion design, vidéos",
+        "Communication print",
+        "Communication événementielle"
       ]
     }
   ];
@@ -104,7 +100,7 @@ const ServicesSection = () => {
               
               <div className="mt-4">
                 <ul className="space-y-2">
-                  {service.details.slice(0, 3).map((detail, idx) => (
+                  {service.details.slice(0, 5).map((detail, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <ChevronRight size={14} className="text-gold-500 mt-1 flex-shrink-0" />
                       <span className="text-xs text-gold-100/80 text-left">{detail}</span>

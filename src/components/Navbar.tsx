@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -66,6 +67,7 @@ const Navbar = () => {
     { name: 'Accueil', href: '#home' },
     { name: 'À Propos', href: '#about' },
     { name: 'Services', href: '#services' },
+    { name: 'Formations', href: '#formations' },
     { name: 'Réalisations', href: '#portfolio' },
     { name: 'Vidéos', href: '#videos' },
     { name: 'Témoignages', href: '#testimonials' },
