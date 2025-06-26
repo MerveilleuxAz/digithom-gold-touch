@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -28,7 +27,7 @@ const HeroSection = () => {
   return (
     <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background with subtle pattern */}
-      <div className="absolute inset-0 bg-black">
+      <div className="absolute inset-0 bg-black dark:bg-black light:bg-white">
         <div className="absolute inset-0 opacity-20" style={{ 
           backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(255, 215, 0, 0.2) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(255, 215, 0, 0.2) 2%, transparent 0%)',
           backgroundSize: '100px 100px'
@@ -43,14 +42,13 @@ const HeroSection = () => {
             <span className="gold-gradient-text">Designer, c'est dessiner à dessein.</span>
           </h1>
           
-          <p className="animate-on-scroll opacity-0 text-lg text-white max-w-lg">
+          <p className="animate-on-scroll opacity-0 text-lg text-white dark:text-white light:text-gray-800 max-w-lg">
             Une approche créative et stratégique pour transformer vos idées en expériences visuelles mémorables.
           </p>
           
           <div className="animate-on-scroll opacity-0 pt-4">
             <button className="gold-button text-white group">
               En savoir plus
-              {/* <ArrowRight className="ml-2 inline-block transition-transform group-hover:translate-x-1" size={18} /> */}
             </button>
           </div>
         </div>
@@ -65,7 +63,7 @@ const HeroSection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-black rounded-full flex items-center justify-center border border-gold-500/30">
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-black dark:bg-black light:bg-white rounded-full flex items-center justify-center border border-gold-500/30">
               <span className="text-xs text-gold-400 font-semibold">DEPUIS<br/>2020</span>
             </div>
           </div>

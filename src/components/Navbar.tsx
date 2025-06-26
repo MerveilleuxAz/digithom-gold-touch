@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+import ThemeToggle from '@/components/ThemeToggle';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -78,7 +79,7 @@ const Navbar = () => {
     <nav 
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
-        isScrolled ? 'bg-black/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-black/80 dark:bg-black/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
       )}
       role="navigation"
       aria-label="Navigation principale"
@@ -113,8 +114,8 @@ const Navbar = () => {
                             "after:content-[''] after:absolute after:h-0.5 after:bg-gold-500 after:bottom-0 after:left-0",
                             "after:transition-all after:duration-300 hover:after:w-full",
                             isActive 
-                              ? "text-gold-400 after:w-full" 
-                              : "text-gold-300 hover:text-gold-500 after:w-0"
+                              ? "text-white dark:text-white after:w-full" 
+                              : "text-gold-300 dark:text-gold-300 hover:text-gold-500 dark:hover:text-gold-500 after:w-0"
                           )}
                           aria-current={isActive ? 'page' : undefined}
                         >
@@ -126,16 +127,20 @@ const Navbar = () => {
                 </NavigationMenuList>
               </NavigationMenu>
               
-              <Button 
-                variant="ghost" 
-                className="ml-4 bg-gold-500/10 text-gold-400 font-semibold group-hover:translate-x-1 hover:text-gold-400 border border-gold-500/30"
-                aria-label="Demander un devis"
-              >
-                Demander un devis
-              </Button>
+              <div className="flex items-center gap-2 ml-4">
+                <ThemeToggle />
+                <Button 
+                  variant="ghost" 
+                  className="bg-gold-500/10 text-gold-400 font-semibold hover:text-gold-400 border border-gold-500/30 dark:bg-gold-500/10 dark:text-gold-400 dark:hover:text-gold-400"
+                  aria-label="Demander un devis"
+                >
+                  Demander un devis
+                </Button>
+              </div>
             </div>
           ) : (
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
               <button 
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gold-500 hover:text-gold-400 transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
@@ -168,8 +173,8 @@ const Navbar = () => {
                   className={cn(
                     "block px-3 py-3 text-base font-medium border-b border-gold-900/30 transition-all duration-200",
                     isActive 
-                      ? "text-gold-400 border-l-4 border-l-gold-500 pl-4" 
-                      : "text-gold-300 hover:text-gold-500"
+                      ? "text-white dark:text-white border-l-4 border-l-gold-500 pl-4" 
+                      : "text-gold-300 dark:text-gold-300 hover:text-gold-500 dark:hover:text-gold-500"
                   )}
                   onClick={() => setIsOpen(false)}
                   role="menuitem"

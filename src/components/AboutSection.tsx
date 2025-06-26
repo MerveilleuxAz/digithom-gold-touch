@@ -49,7 +49,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black dark:from-black light:from-white to-transparent"></div>
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       
@@ -68,11 +68,11 @@ const AboutSection = () => {
               Passionné par le Design & l'Expérience Utilisateur
             </h3>
             
-            <p className="animate-on-scroll opacity-0 text-white">
+            <p className="animate-on-scroll opacity-0 text-white dark:text-white light:text-gray-800">
               Chez DIGiTHOM, nous créons des designs qui racontent votre histoire. Nous transformons vos idées en expériences visuelles captivantes qui communiquent votre message de manière claire et mémorable.
             </p>
             
-            <p className="animate-on-scroll opacity-0 text-white">
+            <p className="animate-on-scroll opacity-0 text-white dark:text-white light:text-gray-800">
               Notre approche allie esthétique et fonctionnalité pour des créations qui non seulement plaisent à l'œil mais qui répondent également à vos objectifs stratégiques.
             </p>
             
@@ -85,7 +85,7 @@ const AboutSection = () => {
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-gold-500" />
-                  <span>{item}</span>
+                  <span className="text-white dark:text-white light:text-gray-800">{item}</span>
                 </li>
               ))}
             </ul>
@@ -101,7 +101,7 @@ const AboutSection = () => {
               >
                 <div className="mb-4 bg-gold-500/10 p-3 rounded-full">{item.icon}</div>
                 <h4 className="text-xl font-bold text-gold-300 mb-2">{item.title}</h4>
-                <p className="text-sm text-white">{item.description}</p>
+                <p className="text-sm text-white dark:text-white light:text-gray-800">{item.description}</p>
               </div>
             ))}
           </div>
