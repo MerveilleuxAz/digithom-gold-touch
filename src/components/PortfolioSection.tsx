@@ -105,7 +105,7 @@ const PortfolioSection = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 relative overflow-hidden">
+    <section id="portfolio" className="py-20 relative overflow-hidden dark:bg-black light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -116,7 +116,7 @@ const PortfolioSection = () => {
             <span className="gold-gradient-text">Réalisations & Portfolio</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
             Découvrez quelques-unes de nos créations qui transforment des idées en expériences visuelles exceptionnelles.
           </p>
         </div>
@@ -129,7 +129,7 @@ const PortfolioSection = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 selectedCategory === category.id
                   ? 'bg-gold-500 text-black'
-                  : 'bg-muted text-gold-300 hover:bg-gold-500/20'
+                  : 'bg-muted dark:bg-muted light:bg-gray-200 text-gold-300 dark:text-gold-300 light:text-gold-600 hover:bg-gold-500/20'
               }`}
               onClick={() => handleCategoryChange(category.id)}
             >
@@ -153,8 +153,8 @@ const PortfolioSection = () => {
                 className="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
               />
               <div className="portfolio-item-overlay p-6 flex flex-col items-center justify-center">
-                <h3 className="text-xl font-bold text-gold-300 mb-2">{project.title}</h3>
-                <p className="text-sm text-white mb-4">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</p>
+                <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-2">{project.title}</h3>
+                <p className="text-sm text-white dark:text-white light:text-gray-800 mb-4">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</p>
                 <button className="gold-button text-sm py-2 px-4">
                   Voir le Projet
                 </button>
@@ -184,20 +184,20 @@ const PortfolioSection = () => {
                     />
                   </div>
                   <div className="md:w-1/2 space-y-4">
-                    <h3 className="text-2xl font-bold text-gold-300">{project.title}</h3>
-                    <p className="text-white">{project.description}</p>
+                    <h3 className="text-2xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600">{project.title}</h3>
+                    <p className="text-white dark:text-white light:text-gray-800">{project.description}</p>
                     <div className="pt-4 space-y-2">
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Client:</span>
-                        <span className="text-white">{project.client}</span>
+                        <span className="text-white dark:text-white light:text-gray-800">{project.client}</span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Année:</span>
-                        <span className="text-white">{project.year}</span>
+                        <span className="text-white dark:text-white light:text-gray-800">{project.year}</span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Catégorie:</span>
-                        <span className="text-white">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</span>
+                        <span className="text-white dark:text-white light:text-gray-800">{project.category.charAt(0).toUpperCase() + project.category.slice(1)}</span>
                       </div>
                     </div>
                     <div className="pt-6">

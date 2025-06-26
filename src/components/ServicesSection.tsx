@@ -71,7 +71,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden bg-black/80">
+    <section id="services" className="py-20 relative overflow-hidden bg-black/80 dark:bg-black/80 light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 right-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 left-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -82,7 +82,7 @@ const ServicesSection = () => {
             <span className="gold-gradient-text">Nos Services & Expertises</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
             Des solutions créatives sur mesure pour donner vie à vos projets les plus ambitieux.
           </p>
         </div>
@@ -95,15 +95,15 @@ const ServicesSection = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="mb-6 bg-gold-500/10 p-4 rounded-full">{service.icon}</div>
-              <h3 className="text-xl font-bold text-gold-300 mb-3">{service.title}</h3>
-              <p className="text-sm text-gold-100/70 mb-4">{service.description}</p>
+              <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-3">{service.title}</h3>
+              <p className="text-sm text-gold-100/70 dark:text-gold-100/70 light:text-gray-600 mb-4">{service.description}</p>
               
               <div className="mt-4">
                 <ul className="space-y-2">
                   {service.details.slice(0, 5).map((detail, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <ChevronRight size={14} className="text-gold-500 mt-1 flex-shrink-0" />
-                      <span className="text-xs text-gold-100/80 text-left">{detail}</span>
+                      <span className="text-xs text-gold-100/80 dark:text-gold-100/80 light:text-gray-700 text-left">{detail}</span>
                     </li>
                   ))}
                 </ul>

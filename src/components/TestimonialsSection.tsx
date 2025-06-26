@@ -70,7 +70,7 @@ const TestimonialsSection = () => {
   }, [nextSlide]);
 
   return (
-    <section id="testimonials" className="py-20 relative overflow-hidden bg-black/80">
+    <section id="testimonials" className="py-20 relative overflow-hidden bg-black/80 dark:bg-black/80 light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 right-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 left-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -81,7 +81,7 @@ const TestimonialsSection = () => {
             <span className="gold-gradient-text">Témoignages Clients</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
             Découvrez ce que nos clients disent de notre travail et de notre collaboration.
           </p>
         </div>
@@ -107,8 +107,8 @@ const TestimonialsSection = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <h4 className="text-gold-300 font-bold text-center">{testimonial.name}</h4>
-                      <p className="text-gold-400/70 text-sm text-center">{testimonial.position}</p>
+                      <h4 className="text-gold-300 dark:text-gold-300 light:text-gold-600 font-bold text-center">{testimonial.name}</h4>
+                      <p className="text-gold-400/70 dark:text-gold-400/70 light:text-gray-600 text-sm text-center">{testimonial.position}</p>
                       <div className="flex mt-2">
                         {[...Array(5)].map((_, i) => (
                           <Star 
@@ -121,8 +121,8 @@ const TestimonialsSection = () => {
                       </div>
                     </div>
                     <div className="md:w-3/4 relative">
-                      <Quote className="absolute -top-6 -left-6 text-gold-500/20" size={60} />
-                      <p className="text-white italic text-lg relative z-10">
+                      <Quote className="absolute -top-6 -left-6 text-gold-500/20 dark:text-gold-500/20 light:text-gold-300/30" size={60} />
+                      <p className="text-white dark:text-white light:text-gray-800 italic text-lg relative z-10">
                         "{testimonial.quote}"
                       </p>
                     </div>
@@ -133,13 +133,13 @@ const TestimonialsSection = () => {
             
             {/* Navigation arrows */}
             <button 
-              className="absolute top-1/2 left-2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-gold-300 hover:text-gold-500 transition-colors"
+              className="absolute top-1/2 left-2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 dark:bg-black/50 light:bg-white/70 flex items-center justify-center text-gold-300 hover:text-gold-500 transition-colors"
               onClick={prevSlide}
             >
               <ChevronLeft size={24} />
             </button>
             <button 
-              className="absolute top-1/2 right-2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-gold-300 hover:text-gold-500 transition-colors"
+              className="absolute top-1/2 right-2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 dark:bg-black/50 light:bg-white/70 flex items-center justify-center text-gold-300 hover:text-gold-500 transition-colors"
               onClick={nextSlide}
             >
               <ChevronRight size={24} />

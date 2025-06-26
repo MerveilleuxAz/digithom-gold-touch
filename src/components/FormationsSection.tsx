@@ -54,7 +54,7 @@ const FormationsSection = () => {
   ];
 
   return (
-    <section id="formations" className="py-20 relative overflow-hidden">
+    <section id="formations" className="py-20 relative overflow-hidden dark:bg-black light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -65,7 +65,7 @@ const FormationsSection = () => {
             <span className="gold-gradient-text">Formations</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
             Développez vos compétences avec nos formations spécialisées en communication, branding et marketing digital.
           </p>
         </div>
@@ -77,18 +77,18 @@ const FormationsSection = () => {
               <div className="mb-6 bg-gold-500/10 p-4 rounded-full inline-block">
                 <GraduationCap size={48} className="text-gold-400" />
               </div>
-              <h3 className="text-2xl font-bold text-gold-300 mb-4">Modules de Formation</h3>
-              <p className="text-gold-100/70 mb-6">
+              <h3 className="text-2xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-4">Modules de Formation</h3>
+              <p className="text-gold-100/70 dark:text-gold-100/70 light:text-gray-600 mb-6">
                 Des formations sur mesure adaptées à vos besoins spécifiques, dispensées en interne ou directement au sein de votre entreprise.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center justify-center gap-2">
                   <span className="w-2 h-2 bg-gold-500 rounded-full"></span>
-                  <span className="text-gold-100/80">Formation interne</span>
+                  <span className="text-gold-100/80 dark:text-gold-100/80 light:text-gray-700">Formation interne</span>
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <span className="w-2 h-2 bg-gold-500 rounded-full"></span>
-                  <span className="text-gold-100/80">Formation en entreprise</span>
+                  <span className="text-gold-100/80 dark:text-gold-100/80 light:text-gray-700">Formation en entreprise</span>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@ const FormationsSection = () => {
           
           {/* Right side - Thématiques */}
           <div className="space-y-6">
-            <h3 className="animate-on-scroll opacity-0 text-2xl font-bold text-gold-400 text-center md:text-left">
+            <h3 className="animate-on-scroll opacity-0 text-2xl font-bold text-gold-400 dark:text-gold-400 light:text-gold-600 text-center md:text-left">
               Nos Thématiques
             </h3>
             <div className="grid gap-6">
@@ -110,8 +110,8 @@ const FormationsSection = () => {
                     {thematique.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-gold-300 mb-2">{thematique.title}</h4>
-                    <p className="text-sm text-gold-100/70">{thematique.description}</p>
+                    <h4 className="text-lg font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-2">{thematique.title}</h4>
+                    <p className="text-sm text-gold-100/70 dark:text-gold-100/70 light:text-gray-600">{thematique.description}</p>
                   </div>
                 </div>
               ))}

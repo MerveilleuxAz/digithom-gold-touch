@@ -85,7 +85,7 @@ const VideosSection = () => {
   ];
 
   return (
-    <section id="videos" className="py-20 relative overflow-hidden">
+    <section id="videos" className="py-20 relative overflow-hidden dark:bg-black light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -96,7 +96,7 @@ const VideosSection = () => {
             <span className="gold-gradient-text">Vidéos & Showreel</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
             Découvrez notre travail en mouvement à travers des vidéos qui illustrent notre processus créatif et nos réalisations.
           </p>
         </div>
@@ -127,8 +127,8 @@ const VideosSection = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gold-300 mb-2">{video.title}</h3>
-                <p className="text-white text-sm mb-4">{video.description}</p>
+                <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-2">{video.title}</h3>
+                <p className="text-white dark:text-white light:text-gray-800 text-sm mb-4">{video.description}</p>
                 <button 
                   className="text-gold-400 hover:text-gold-300 text-sm flex items-center gap-2 transition-colors"
                   onClick={() => setSelectedVideo(video)}
@@ -163,8 +163,8 @@ const VideosSection = () => {
               </div>
               
               <div className="p-4">
-                <h3 className="text-xl font-bold text-gold-300">{selectedVideo.title}</h3>
-                <p className="text-white text-sm mt-2">{selectedVideo.description}</p>
+                <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600">{selectedVideo.title}</h3>
+                <p className="text-white dark:text-white light:text-gray-800 text-sm mt-2">{selectedVideo.description}</p>
               </div>
             </div>
           </div>
