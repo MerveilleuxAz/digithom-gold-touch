@@ -71,7 +71,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden bg-black/80 dark:bg-black/80 light:bg-white">
+    <section id="services" className="py-20 relative overflow-hidden bg-black/80 dark:bg-black/80 light:bg-gray-50">
       {/* Decorative elements */}
       <div className="absolute -top-40 right-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 left-0 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -91,11 +91,11 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index}
-              className="animate-on-scroll opacity-0 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center h-[400px]"
+              className="animate-on-scroll opacity-0 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center h-[400px] dark:bg-white/5 light:bg-white light:border light:border-gold-200 light:shadow-lg"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="mb-6 bg-gold-500/10 p-4 rounded-full">{service.icon}</div>
-              <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-3">{service.title}</h3>
+              <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-700 mb-3">{service.title}</h3>
               <p className="text-sm text-gold-100/70 dark:text-gold-100/70 light:text-gray-600 mb-4">{service.description}</p>
               
               <div className="mt-4">

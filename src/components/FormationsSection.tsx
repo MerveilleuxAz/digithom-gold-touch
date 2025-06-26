@@ -54,7 +54,7 @@ const FormationsSection = () => {
   ];
 
   return (
-    <section id="formations" className="py-20 relative overflow-hidden dark:bg-black light:bg-white">
+    <section id="formations" className="py-20 relative overflow-hidden bg-black dark:bg-black light:bg-white">
       {/* Decorative elements */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
@@ -73,11 +73,11 @@ const FormationsSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           {/* Left side - Formation principale */}
           <div className="animate-on-scroll opacity-0">
-            <div className="glass-panel rounded-xl p-8 text-center">
+            <div className="glass-panel rounded-xl p-8 text-center dark:bg-white/5 light:bg-white light:border light:border-gold-200 light:shadow-lg">
               <div className="mb-6 bg-gold-500/10 p-4 rounded-full inline-block">
                 <GraduationCap size={48} className="text-gold-400" />
               </div>
-              <h3 className="text-2xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-4">Modules de Formation</h3>
+              <h3 className="text-2xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-700 mb-4">Modules de Formation</h3>
               <p className="text-gold-100/70 dark:text-gold-100/70 light:text-gray-600 mb-6">
                 Des formations sur mesure adaptées à vos besoins spécifiques, dispensées en interne ou directement au sein de votre entreprise.
               </p>
@@ -103,14 +103,14 @@ const FormationsSection = () => {
               {thematiques.map((thematique, index) => (
                 <div 
                   key={index}
-                  className="animate-on-scroll opacity-0 glass-panel p-6 rounded-xl flex items-start gap-4 transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+                  className="animate-on-scroll opacity-0 glass-panel p-6 rounded-xl flex items-start gap-4 transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] dark:bg-white/5 light:bg-white light:border light:border-gold-200 light:shadow-lg"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="bg-gold-500/10 p-3 rounded-full flex-shrink-0">
                     {thematique.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-2">{thematique.title}</h4>
+                    <h4 className="text-lg font-bold text-gold-300 dark:text-gold-300 light:text-gold-700 mb-2">{thematique.title}</h4>
                     <p className="text-sm text-gold-100/70 dark:text-gold-100/70 light:text-gray-600">{thematique.description}</p>
                   </div>
                 </div>
