@@ -128,7 +128,7 @@ const Navbar = () => {
               </NavigationMenu>
               
               <div className="flex items-center gap-2 ml-4">
-                <ThemeToggle />
+                { /* <ThemeToggle /> */}
                 <Button 
                   variant="ghost" 
                   className="bg-gold-500/10 text-gold-400 font-semibold hover:text-gold-400 border border-gold-500/30 dark:bg-gold-500/10 dark:text-gold-400 dark:hover:text-gold-400"
@@ -140,7 +140,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="md:hidden flex items-center gap-2">
-              <ThemeToggle />
+              { /* <ThemeToggle /> */}
               <button 
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gold-500 hover:text-gold-400 transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
