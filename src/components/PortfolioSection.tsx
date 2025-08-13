@@ -165,8 +165,20 @@ const PortfolioSection = () => {
         
         {/* Lightbox */}
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-fade-in">
-            <div className="w-full max-w-4xl max-h-[90vh] overflow-auto glass-panel rounded-xl p-6 md:p-8 relative">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+            {/* Background image with zoom effect */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${projects.find(p => p.id === selectedProject)?.image})`,
+                transform: 'scale(1.1)',
+                filter: 'blur(8px) brightness(0.3)'
+              }}
+            />
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/70" />
+            
+            <div className="w-full max-w-4xl max-h-[90vh] overflow-auto glass-panel rounded-xl p-6 md:p-8 relative z-10">
               <button 
                 className="absolute top-4 right-4 text-gold-300 hover:text-gold-500 transition-colors"
                 onClick={() => setSelectedProject(null)}
