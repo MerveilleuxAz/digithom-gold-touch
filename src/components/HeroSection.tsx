@@ -35,7 +35,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content container */}
-      <div className="container mx-auto px-4 z-10 flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-4 z-10 flex flex-col-reverse md:flex-row items-center justify-between gap-6">
         {/* Left side - Text */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-bold" ref={textRef}>
@@ -57,7 +57,7 @@ const HeroSection = () => {
         <div className="md:w-1/2 flex justify-center md:justify-end">
           <div className="relative animate-on-scroll opacity-0">
             {/* Main image container with modern styling */}
-            <div className="relative w-72 h-96 md:w-80 md:h-[28rem]">
+            <div className="relative w-80 h-[28rem] md:w-96 md:h-[32rem] lg:w-[26rem] lg:h-[36rem]">
               {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-gold-500/20 to-gold-600/30 rounded-2xl transform rotate-6"></div>
               
