@@ -5,7 +5,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ThemeToggle from '@/components/ThemeToggle';
-import { 
+import { useLocation } from 'react-router-dom';
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -20,9 +21,13 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   // Optimisation de la fonction handleScroll avec useCallback
   const handleScroll = useCallback(() => {
+    if (!isHomePage) return;
+
     const scrollY = window.scrollY;
     setIsScrolled(scrollY > 50);
 
@@ -35,10 +40,10 @@ const Navbar = () => {
       sections.forEach(section => {
         const rect = section.getBoundingClientRect();
         const sectionId = section.getAttribute('id');
-        
+
         // Calcul de la distance entre le haut de la section et le haut de la fenêtre
         const distance = Math.abs(rect.top);
-        
+
         // Si la section est visible dans la fenêtre et plus proche que la précédente
         if (rect.top <= 100 && distance < minDistance && sectionId) {
           minDistance = distance;
@@ -48,7 +53,7 @@ const Navbar = () => {
 
       setActiveSection(currentSection);
     });
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -65,18 +70,18 @@ const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { name: 'Accueil', href: '#home' },
-    { name: 'À Propos', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Formations', href: '#formations' },
-    { name: 'Réalisations', href: '#portfolio' },
-    { name: 'Vidéos', href: '#videos' },
-    { name: 'Témoignages', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Accueil', href: isHomePage ? '#home' : '/#home' },
+    { name: 'À Propos', href: isHomePage ? '#about' : '/#about' },
+    { name: 'Services', href: isHomePage ? '#services' : '/#services' },
+    { name: 'Formations', href: isHomePage ? '#formations' : '/#formations' },
+    { name: 'Réalisations', href: isHomePage ? '#portfolio' : '/#portfolio' },
+    { name: 'Vidéos', href: isHomePage ? '#videos' : '/#videos' },
+    { name: 'Témoignages', href: isHomePage ? '#testimonials' : '/#testimonials' },
+    { name: 'Contact', href: isHomePage ? '#contact' : '/#contact' },
   ];
 
   return (
-    <nav 
+    <nav
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
         isScrolled ? 'bg-black/80 dark:bg-black/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
@@ -87,10 +92,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
-            <a href="#home" className="flex items-center" aria-label="Retour à l'accueil">
-              <img 
-                src="/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png" 
-                alt="DIGiTHOM Logo" 
+            <a href={isHomePage ? '#home' : '/#home'} className="flex items-center" aria-label="Retour à l'accueil">
+              <img
+                src="/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png"
+                alt="DIGiTHOM Logo"
                 className="h-12 w-auto mr-2"
                 width="48"
                 height="48"
@@ -98,7 +103,7 @@ const Navbar = () => {
               <span className="text-2xl font-bold gold-gradient-text hidden md:block">DIGiTHOM</span>
             </a>
           </div>
-          
+
           {!isMobile ? (
             <div className="hidden md:flex items-center space-x-1">
               <NavigationMenu>
@@ -107,14 +112,14 @@ const Navbar = () => {
                     const isActive = activeSection === link.href.substring(1);
                     return (
                       <NavigationMenuItem key={link.name}>
-                        <NavigationMenuLink 
+                        <NavigationMenuLink
                           href={link.href}
                           className={cn(
                             "px-3 py-2 transition-colors duration-200 relative group",
                             "after:content-[''] after:absolute after:h-0.5 after:bg-gold-500 after:bottom-0 after:left-0",
                             "after:transition-all after:duration-300 hover:after:w-full",
-                            isActive 
-                              ? "text-white dark:text-white after:w-full" 
+                            isActive
+                              ? "text-white dark:text-white after:w-full"
                               : "text-gold-300 dark:text-gold-300 hover:text-gold-500 dark:hover:text-gold-500 after:w-0"
                           )}
                           aria-current={isActive ? 'page' : undefined}
@@ -126,11 +131,11 @@ const Navbar = () => {
                   })}
                 </NavigationMenuList>
               </NavigationMenu>
-              
+
               <div className="flex items-center gap-2 ml-4">
                 { /* <ThemeToggle /> */}
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className="bg-gold-500/10 text-gold-400 font-semibold hover:text-gold-400 border border-gold-500/30 dark:bg-gold-500/10 dark:text-gold-400 dark:hover:text-gold-400"
                   aria-label="Demander un devis"
                 >
@@ -141,7 +146,7 @@ const Navbar = () => {
           ) : (
             <div className="md:hidden flex items-center gap-2">
               { /* <ThemeToggle /> */}
-              <button 
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gold-500 hover:text-gold-400 transition-colors p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500/50"
                 aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -157,7 +162,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && isMobile && (
-        <div 
+        <div
           id="mobile-menu"
           className="md:hidden animate-fade-in glass-panel"
           role="menu"
@@ -172,8 +177,8 @@ const Navbar = () => {
                   href={link.href}
                   className={cn(
                     "block px-3 py-3 text-base font-medium border-b border-gold-900/30 transition-all duration-200",
-                    isActive 
-                      ? "text-white dark:text-white border-l-4 border-l-gold-500 pl-4" 
+                    isActive
+                      ? "text-white dark:text-white border-l-4 border-l-gold-500 pl-4"
                       : "text-gold-300 dark:text-gold-300 hover:text-gold-500 dark:hover:text-gold-500"
                   )}
                   onClick={() => setIsOpen(false)}
@@ -185,8 +190,8 @@ const Navbar = () => {
               );
             })}
             <div className="pt-2">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full mt-2 border-gold-500/50 text-gold hover:bg-gold-500/10"
                 aria-label="Demander un devis"
               >

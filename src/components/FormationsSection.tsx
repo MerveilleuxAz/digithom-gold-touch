@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { GraduationCap, Users, BookOpen, Target } from 'lucide-react';
+import { GraduationCap, Users, BookOpen, Target, Camera } from 'lucide-react';
 
 const FormationsSection = () => {
   useEffect(() => {
@@ -50,6 +50,11 @@ const FormationsSection = () => {
       icon: <Users size={28} className="text-gold-400" />,
       title: "Marketing Digital",
       description: "Découvrez les stratégies digitales efficaces pour développer votre présence en ligne."
+    },
+    {
+      icon: <Camera size={28} className="text-gold-400" />,
+      title: "Prises de vues aériennes par drone",
+      description: "Vidéos et photographies haute définition pour l'immobilier, la construction et les événements."
     }
   ];
 
@@ -58,7 +63,7 @@ const FormationsSection = () => {
       {/* Decorative elements */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
-      
+
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="animate-on-scroll opacity-0 text-3xl md:text-4xl font-bold mb-4">
@@ -69,7 +74,7 @@ const FormationsSection = () => {
             Développez vos compétences avec nos formations spécialisées en communication, branding et marketing digital.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           {/* Left side - Formation principale */}
           <div className="animate-on-scroll opacity-0">
@@ -93,7 +98,7 @@ const FormationsSection = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Right side - Thématiques */}
           <div className="space-y-6">
             <h3 className="animate-on-scroll opacity-0 text-2xl font-bold text-gold-400 dark:text-gold-400 light:text-gold-600 text-center md:text-left">
@@ -101,7 +106,7 @@ const FormationsSection = () => {
             </h3>
             <div className="grid gap-6">
               {thematiques.map((thematique, index) => (
-                <div 
+                <div
                   key={index}
                   className="animate-on-scroll opacity-0 glass-panel p-6 rounded-xl flex items-start gap-4 transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] dark:bg-white/5 light:bg-white light:border light:border-gold-200 light:shadow-lg"
                   style={{ animationDelay: `${index * 0.1}s` }}

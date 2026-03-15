@@ -85,8 +85,8 @@ const ContactSection = () => {
     {
       icon: <Phone size={20} className="text-gold-500" />,
       title: 'Téléphone',
-      value: '+229 41 51 53 03',
-      link: 'tel:+22941515303'
+      value: '+229 01 41 51 53 03',
+      link: 'tel:+2290141515303'
     },
     {
       icon: <MapPin size={20} className="text-gold-500" />,
@@ -157,7 +157,7 @@ const ContactSection = () => {
                   />
                 </div>
                 
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <label htmlFor="subject" className="text-gold-400 text-sm">
                     Objet
                   </label>
@@ -170,7 +170,7 @@ const ContactSection = () => {
                     required
                     className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
                   />
-                </div>
+                </div> */}
                 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-gold-400 text-sm">

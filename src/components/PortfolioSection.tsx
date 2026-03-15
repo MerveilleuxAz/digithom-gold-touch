@@ -28,92 +28,111 @@ const PortfolioSection = () => {
   const categories = [
     { id: 'all', name: 'Tous' },
     { id: 'branding', name: 'Branding' },
+    { id: 'communication', name: 'Communication' },
+    { id: 'event', name: 'Evénementiel' },
     { id: 'web', name: 'Web Design' },
-    { id: 'mobile', name: 'Mobile' },
     { id: 'print', name: 'Print' },
   ];
 
   const projects = [
     {
       id: 1,
-      title: 'Refonte Identité Marque',
-      category: 'branding',
-      image: '/assets/img/branding/branding-1.jpg',
+      title: 'Formation en rédaction d\'actes juridiques',
+      category: 'communication',
+      image: '/assets/img/communication/com-1.jpg',
       description: "Modernisation complète de l'identité visuelle d'une marque de luxe, incluant logo, charte graphique et supports de communication.",
-      client: 'Luxury Brand Inc.',
-      year: '2023'
+      client: 'Legal and Business consulting',
+      year: '2024'
     },
     {
       id: 2,
-      title: 'Site E-commerce Premium',
+      title: 'Noël des Jeunes',
       category: 'print',
       image: '/assets/img/print/print-1.jpg',
       description: "Conception d'une plateforme e-commerce haut de gamme avec une expérience utilisateur immersive et des parcours d'achat optimisés.",
-      client: 'Premium Shop',
-      year: '2022'
+      client: 'Eglise de Pentecôte',
+      year: '2024'
     },
     {
       id: 3,
-      title: 'Application Mobile Finance',
-      category: 'branding',
-      image: '/assets/img/branding/branding-2.jpg',
-      description: "Design UI/UX d'une application mobile de gestion financière avec interfaces intuitives et visualisations de données avancées.",
-      client: 'FinTech Solutions',
-      year: '2022'
+      title: 'Appel aux dons de kit scolaire',
+      category: 'communication',
+      image: '/assets/img/communication/com-2.jpg',
+      description: "Design UI/UX d'une application communication de gestion financière avec interfaces intuitives et visualisations de données avancées.",
+      client: 'Association des Jeunes Pentecôtistes de HOUEDJAMEY',
+      year: '2023'
     },
     {
       id: 4,
-      title: 'Brochure Produit Premium',
+      title: 'Camp des Jeunes',
       category: 'print',
       image: '/assets/img/print/print-2.jpg',
       description: "Création d'une brochure luxueuse présentant une collection exclusive, avec finitions dorées et mise en page sophistiquée.",
-      client: 'Exclusive Collections',
-      year: '2021'
+      client: 'Eglise de Pentecôte',
+      year: '2024'
     },
     {
       id: 5,
-      title: 'Identité Restaurant Gastronomique',
-      category: 'branding',
-      image: '/assets/img/branding/branding-3.jpg',
+      title: 'Appel aux dons de kits scolaires à l\'endroit des enfants démunis & orphelins',
+      category: 'communication',
+      image: '/assets/img/communication/com-3.jpg',
       description: "Développement complet de l'identité visuelle d'un restaurant étoilé, de la signalétique aux menus et cartes de visite.",
-      client: 'Gourmet Élégance',
+      client: 'ONG Espoir Plus Afrique',
       year: '2021'
     },
     {
       id: 6,
-      title: 'Landing Page Événement',
+      title: 'Plateforme d\'emprunt de livre',
       category: 'web',
-      image: '/lovable-uploads/picture.jpg',
+      image: '/assets/img/web/web-1.png',
       description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
-      client: 'Exclusive Event Co.',
-      year: '2020'
+      client: 'Anonyme',
+      year: '2025'
     },
     {
       id: 7,
-      title: 'Landing Page Événement',
+      title: 'Portfolio - FIU',
       category: 'web',
-      image: '/lovable-uploads/picture.jpg',
+      image: '/assets/img/web/web-2.png',
       description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
-      client: 'Exclusive Event Co.',
-      year: '2020'
+      client: 'Future Is Us',
+      year: '2023'
     },
     {
       id: 8,
-      title: 'Landing Page Événement',
+      title: 'Portfolio - RP',
       category: 'web',
-      image: '/lovable-uploads/picture.jpg',
+      image: '/assets/img/web/web-3.png',
       description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
-      client: 'Exclusive Event Co.',
-      year: '2020'
+      client: 'Ressources Plus',
+      year: '2024'
     },
     {
       id: 9,
-      title: 'Landing Page Événement',
-      category: 'web',
-      image: '/lovable-uploads/picture.jpg',
+      title: 'Jeûne & Prière',
+      category: 'event',
+      image: '/assets/img/event/event-1.jpg',
       description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
-      client: 'Exclusive Event Co.',
-      year: '2020'
+      client: 'Eglise de Pentecôte',
+      year: '2024'
+    },
+    {
+      id: 10,
+      title: 'Prière pour la Nation',
+      category: 'event',
+      image: '/assets/img/event/event-2.jpg',
+      description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
+      client: 'Montagne de Prière Jésus a tout accompli',
+      year: '2024'
+    },
+    {
+      id: 11,
+      title: 'Jeûne & Prière Mensuel',
+      category: 'event',
+      image: '/assets/img/event/event-3.jpg',
+      description: "Design d'une landing page interactive pour un événement exclusif, avec animations et système d'inscription personnalisé.",
+      client: 'Fanfare LAV7T',
+      year: '2025'
     }
   ];
 
@@ -154,8 +173,8 @@ const PortfolioSection = () => {
             <button
               key={category.id}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === category.id
-                  ? 'bg-gold-500 text-black'
-                  : 'bg-muted dark:bg-muted light:bg-gray-200 text-gold-300 dark:text-gold-300 light:text-gold-600 hover:bg-gold-500/20'
+                ? 'bg-gold-500 text-black'
+                : 'bg-muted dark:bg-muted light:bg-gray-200 text-gold-300 dark:text-gold-300 light:text-gold-600 hover:bg-gold-500/20'
                 }`}
               onClick={() => handleCategoryChange(category.id)}
             >
@@ -221,7 +240,7 @@ const PortfolioSection = () => {
                   </div>
                   <div className="md:w-1/2 space-y-4">
                     <h3 className="text-2xl font-bold text-gold-300">{project.title}</h3>
-                    <p className="text-white">{project.description}</p>
+                    {/* <p className="text-white">{project.description}</p> */}
                     <div className="pt-4 space-y-2">
                       <div className="flex gap-2">
                         <span className="text-gold-500 font-medium">Client:</span>

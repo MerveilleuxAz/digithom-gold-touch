@@ -86,7 +86,7 @@ const HeroSection = () => {
               
               {/* Floating badge */}
               <div className="absolute -top-6 left-6 bg-black dark:bg-black light:bg-white rounded-full px-4 py-2 border border-gold-500/30 shadow-lg">
-                <span className="text-gold-400 font-bold text-xs">2020</span>
+                <span className="text-gold-400 font-bold text-xs">Since 2020</span>
               </div>
             </div>
           </div>

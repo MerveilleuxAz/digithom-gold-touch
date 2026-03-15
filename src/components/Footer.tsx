@@ -1,9 +1,12 @@
 
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   // Composant TikTokIcon personnalisé
   const TikTokIcon = ({ size = 24, className = "" }) => (
@@ -30,14 +33,14 @@ const Footer = () => {
   ];
 
   const footerLinks = [
-    { title: 'À propos', href: '#about' },
-    { title: 'Services', href: '#services' },
-    { title: 'Portfolio', href: '#portfolio' },
-    { title: 'Vidéos', href: '#video' },
-    { title: 'Témoignages', href: '#testimonials' },
-    { title: 'Contact', href: '#contact' },
-    { title: 'Mentions Légales', href: '#' },
-    { title: 'Politique de Confidentialité', href: '#' },
+    { title: 'À propos', href: isHomePage ? '#about' : '/#about' },
+    { title: 'Services', href: isHomePage ? '#services' : '/#services' },
+    { title: 'Portfolio', href: isHomePage ? '#portfolio' : '/#portfolio' },
+    { title: 'Vidéos', href: isHomePage ? '#videos' : '/#videos' },
+    { title: 'Témoignages', href: isHomePage ? '#testimonials' : '/#testimonials' },
+    { title: 'Contact', href: isHomePage ? '#contact' : '/#contact' },
+    { title: 'Mentions Légales', href: '/mentions-legales' },
+    { title: 'Politique de Confidentialité', href: '/politique-de-confidentialite' },
   ];
 
   return (
@@ -49,7 +52,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <a href="#home" className="flex items-center" aria-label="Retour à l'accueil">
+            <a href={isHomePage ? '#home' : '/#home'} className="flex items-center" aria-label="Retour à l'accueil">
               <img
                 src="/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png"
                 alt="DIGiTHOM Logo"
