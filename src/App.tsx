@@ -20,6 +20,7 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import { HelmetProvider } from "react-helmet-async";
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
@@ -32,6 +33,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <Analytics />
           <BrowserRouter>
             <AuthProvider>
               <Routes>
