@@ -115,14 +115,14 @@ export default {
 					'50%': { transform: 'translateY(-10px)' },
 				},
 				'ripple': {
-					'0%': { 
-						width: '0px', 
-						height: '0px', 
+					'0%': {
+						width: '0px',
+						height: '0px',
 						opacity: '0.5'
 					},
-					'100%': { 
-						width: '300px', 
-						height: '300px', 
+					'100%': {
+						width: '300px',
+						height: '300px',
 						opacity: '0'
 					},
 				},

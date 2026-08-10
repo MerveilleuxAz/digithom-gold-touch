@@ -1,8 +1,28 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useSingleton } from '@/hooks/useSingletonResource';
+import type { HeroContentRow } from '@/integrations/supabase/types';
 
-const HeroSection = () => {
+export const DEFAULT_HERO_CONTENT: HeroContentRow = {
+  id: 1,
+  title: "Designer, c'est dessiner à dessein.",
+  subtitle: 'Une approche créative et stratégique pour transformer vos idées en expériences visuelles mémorables.',
+  button_text: 'En savoir plus',
+  image_url: '/lovable-uploads/hero.png',
+  image_alt: 'DIGiTHOM - Designer Créatif',
+  label_text: 'DESIGNER CRÉATIF',
+  experience_text: 'Expérience visuelle depuis 2020',
+  badge_text: 'Since 2020',
+  updated_at: '',
+};
+
+interface HeroSectionProps {
+  previewData?: HeroContentRow;
+}
+
+const HeroSection = ({ previewData }: HeroSectionProps) => {
   const textRef = useRef<HTMLHeadingElement>(null);
+  const { data } = useSingleton('hero_content');
+  const hero = previewData ?? data ?? DEFAULT_HERO_CONTENT;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,9 +47,9 @@ const HeroSection = () => {
   return (
     <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden mt-8 md:mt-0">
       {/* Background with subtle pattern */}
-      <div className="absolute inset-0 bg-black dark:bg-black light:bg-white">
-        <div className="absolute inset-0 opacity-20" style={{ 
-          backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(255, 215, 0, 0.2) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(255, 215, 0, 0.2) 2%, transparent 0%)',
+      <div className="absolute inset-0 bg-background">
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(228, 126, 1, 0.25) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(228, 126, 1, 0.25) 2%, transparent 0%)',
           backgroundSize: '100px 100px'
         }}></div>
       </div>
@@ -39,20 +59,20 @@ const HeroSection = () => {
         {/* Left side - Text */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <h1 className="animate-on-scroll opacity-0 text-4xl md:text-5xl lg:text-6xl font-bold" ref={textRef}>
-            <span className="gold-gradient-text">Designer, c'est dessiner à dessein.</span>
+            <span className="gold-gradient-text">{hero.title}</span>
           </h1>
-          
-          <p className="animate-on-scroll opacity-0 text-lg text-white dark:text-white light:text-gray-800 max-w-lg">
-            Une approche créative et stratégique pour transformer vos idées en expériences visuelles mémorables.
+
+          <p className="animate-on-scroll opacity-0 text-lg text-foreground/90 max-w-lg">
+            {hero.subtitle}
           </p>
-          
+
           <div className="animate-on-scroll opacity-0 pt-4">
-            <button className="gold-button text-white group">
-              En savoir plus
+            <button className="gold-button text-black font-semibold group">
+              {hero.button_text}
             </button>
           </div>
         </div>
-        
+
         {/* Right side - Modern Image */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0">
           <div className="relative animate-on-scroll opacity-0">
@@ -60,33 +80,33 @@ const HeroSection = () => {
             <div className="relative w-80 h-[28rem] md:w-96 md:h-[32rem] lg:w-[26rem] lg:h-[36rem]">
               {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-gold-500/20 to-gold-600/30 rounded-2xl transform rotate-6"></div>
-              
+
               {/* Image container */}
-              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-gold-500/20 backdrop-blur-sm bg-black/10 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
-                <img 
-                  src="/lovable-uploads/hero.jpg" 
-                  alt="DIGiTHOM - Designer Créatif" 
+              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-gold-500/20 backdrop-blur-sm bg-muted/20 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                <img
+                  src={hero.image_url}
+                  alt={hero.image_alt}
                   className="w-full h-full object-cover"
                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
+
                 {/* Designer label */}
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="glass-panel rounded-lg p-3 text-center">
-                    <span className="text-gold-400 font-semibold text-sm">DESIGNER CRÉATIF</span>
-                    <p className="text-white/80 text-xs mt-1">Expérience visuelle depuis 2020</p>
+                    <span className="text-gold-500 dark:text-gold-400 font-semibold text-sm">{hero.label_text}</span>
+                    <p className="text-foreground/80 text-xs mt-1">{hero.experience_text}</p>
                   </div>
                 </div>
               </div>
-              
+
               {/* Decorative elements */}
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-gold-500 rounded-full animate-pulse"></div>
               <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gold-400/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              
+
               {/* Floating badge */}
-              <div className="absolute -top-6 left-6 bg-black dark:bg-black light:bg-white rounded-full px-4 py-2 border border-gold-500/30 shadow-lg">
-                <span className="text-gold-400 font-bold text-xs">Since 2020</span>
+              <div className="absolute -top-6 left-6 bg-background rounded-full px-4 py-2 border border-gold-500/30 shadow-lg">
+                <span className="text-gold-500 dark:text-gold-400 font-bold text-xs">{hero.badge_text}</span>
               </div>
             </div>
           </div>

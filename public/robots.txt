@@ -1,14 +1,47 @@
+# ======================================================
+# robots.txt — DIGiTHOM (https://digithom.com)
+# Mise à jour : 2026-08-10
+# ======================================================
+
+# --- Règles globales ---
+User-agent: *
+Allow: /
+
+# Pages privées — Ne pas indexer ni crawler
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /login
+
+# Empêcher l'indexation des assets de build (si exposés)
+Disallow: /src/
+
+# --- Googlebot ---
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
 
+# --- Bingbot ---
 User-agent: Bingbot
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
 
+# --- Bots réseaux sociaux (crawl pour aperçus de partage) ---
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# --- Sitemap ---
+Sitemap: https://digithom.com/sitemap.xml

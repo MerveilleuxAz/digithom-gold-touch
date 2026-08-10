@@ -1,41 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { Play, Maximize, X } from 'lucide-react';
 
-interface Video {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  videoUrl: string;
-  duration: string;
-}
+import React, { useState, useEffect } from 'react';
+import { Play, X } from 'lucide-react';
+import PaginationControls from '@/components/PaginationControls';
+import { usePublicList } from '@/hooks/useListResource';
+import type { VideoRow } from '@/integrations/supabase/types';
+
+const VIDEOS_PER_PAGE = 6;
+
+export const DEFAULT_VIDEOS: VideoRow[] = [
+  { id: '1', title: 'Processus créatif', description: 'Découvrez notre approche unique du design et comment nous transformons vos idées en réalités visuelles captivantes.', video_url: 'https://www.youtube.com/watch?v=is-sQGCSPBY', duration: '2:45', display_order: 1, is_published: true, created_at: '', updated_at: '' },
+  { id: '2', title: 'Transformation de marque', description: "Étude de cas: comment nous avons revitalisé l'identité visuelle d'une entreprise traditionnelle pour la rendre contemporaine.", video_url: 'https://www.youtube.com/watch?v=is-sQGCSPBY', duration: '4:12', display_order: 2, is_published: true, created_at: '', updated_at: '' },
+  { id: '3', title: 'Design et expérience utilisateur', description: "L'importance de l'UX dans le design d'interface et comment nous créons des expériences mémorables.", video_url: 'https://www.youtube.com/watch?v=is-sQGCSPBY', duration: '3:30', display_order: 3, is_published: true, created_at: '', updated_at: '' },
+];
+
+const getEmbedUrl = (url: string) => {
+  try {
+    const urlObj = new URL(url);
+    const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
+    return `https://www.youtube.com/embed/${videoId}`;
+  } catch (error) {
+    console.error('Invalid YouTube URL:', error);
+    return url;
+  }
+};
+
+const getThumbnailUrl = (url: string) => {
+  try {
+    const urlObj = new URL(url);
+    const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  } catch (error) {
+    console.error('Invalid YouTube URL:', error);
+    return '/placeholder.svg';
+  }
+};
 
 const VideosSection = () => {
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-  
-  // Fonction pour convertir l'URL YouTube en URL d'intégration
-  const getEmbedUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url);
-      const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
-      return `https://www.youtube.com/embed/${videoId}`;
-    } catch (error) {
-      console.error('Invalid YouTube URL:', error);
-      return url;
-    }
-  };
+  const { data } = usePublicList('videos');
+  const videos = data && data.length > 0 ? data : DEFAULT_VIDEOS;
 
-  // Fonction pour obtenir l'URL de la miniature YouTube
-  const getThumbnailUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url);
-      const videoId = urlObj.searchParams.get('v') || urlObj.pathname.split('/').pop();
-      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    } catch (error) {
-      console.error('Invalid YouTube URL:', error);
-      return '/placeholder.svg';
-    }
-  };
+  const [selectedVideo, setSelectedVideo] = useState<VideoRow | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,82 +60,70 @@ const VideosSection = () => {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, []);
+  }, [currentPage, videos]);
 
-  const videos: Video[] = [
-    {
-      id: 1,
-      title: "Processus créatif",
-      description: "Découvrez notre approche unique du design et comment nous transformons vos idées en réalités visuelles captivantes.",
-      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
-      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
-      duration: "2:45"
-    },
-    {
-      id: 2,
-      title: "Transformation de marque",
-      description: "Étude de cas: comment nous avons revitalisé l'identité visuelle d'une entreprise traditionnelle pour la rendre contemporaine.",
-      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
-      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
-      duration: "4:12"
-    },
-    {
-      id: 3,
-      title: "Design et expérience utilisateur",
-      description: "L'importance de l'UX dans le design d'interface et comment nous créons des expériences mémorables.",
-      thumbnail: getThumbnailUrl("https://www.youtube.com/watch?v=is-sQGCSPBY"),
-      videoUrl: "https://www.youtube.com/watch?v=is-sQGCSPBY",
-      duration: "3:30"
-    }
-  ];
+  const totalPages = Math.ceil(videos.length / VIDEOS_PER_PAGE);
+  const paginatedVideos = videos.slice((currentPage - 1) * VIDEOS_PER_PAGE, currentPage * VIDEOS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => {
+      el.classList.remove('animate-fade-in');
+      el.classList.add('opacity-0');
+    });
+
+    setCurrentPage(page);
+  };
 
   return (
-    <section id="videos" className="py-20 relative overflow-hidden dark:bg-black light:bg-white">
+    <section id="videos" className="py-20 relative overflow-hidden bg-background">
       {/* Decorative elements */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
-      
+
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="animate-on-scroll opacity-0 text-3xl md:text-4xl font-bold mb-4">
             <span className="gold-gradient-text">Vidéos & Showreel</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white dark:text-white light:text-gray-800">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-foreground/90">
             Découvrez notre travail en mouvement à travers des vidéos qui illustrent notre processus créatif et nos réalisations.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video, index) => (
-            <div 
+          {paginatedVideos.map((video, index) => (
+            <div
               key={video.id}
               className="animate-on-scroll opacity-0 glass-panel rounded-xl overflow-hidden group hover:shadow-[0_0_15px_5px_rgba(228,126,1,0.15)] transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative aspect-video overflow-hidden">
-                <img 
-                  src={video.thumbnail} 
+                <img
+                  src={getThumbnailUrl(video.video_url)}
                   alt={video.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button 
+                  <button
                     className="w-16 h-16 rounded-full bg-gold-500 flex items-center justify-center transition-transform duration-300 hover:scale-110"
                     onClick={() => setSelectedVideo(video)}
                   >
                     <Play className="text-black ml-1" />
                   </button>
-                  <div className="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded text-xs text-gold-300">
-                    {video.duration}
-                  </div>
+                  {video.duration && (
+                    <div className="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded text-xs text-gold-300">
+                      {video.duration}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600 mb-2">{video.title}</h3>
-                <p className="text-white dark:text-white light:text-gray-800 text-sm mb-4">{video.description}</p>
-                <button 
-                  className="text-gold-400 hover:text-gold-300 text-sm flex items-center gap-2 transition-colors"
+                <h3 className="text-xl font-bold text-gold-600 dark:text-gold-300 mb-2">{video.title}</h3>
+                {video.description && <p className="text-foreground/90 text-sm mb-4">{video.description}</p>}
+                <button
+                  className="text-gold-600 dark:text-gold-400 hover:text-gold-500 text-sm flex items-center gap-2 transition-colors"
                   onClick={() => setSelectedVideo(video)}
                 >
                   <span>Regarder la vidéo</span>
@@ -140,31 +133,33 @@ const VideosSection = () => {
             </div>
           ))}
         </div>
-        
+
+        <PaginationControls currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+
         {/* Video Modal */}
         {selectedVideo && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-fade-in">
             <div className="w-full max-w-4xl glass-panel rounded-xl p-2 relative">
-              <button 
+              <button
                 className="absolute top-4 right-4 text-gold-300 hover:text-gold-500 z-20 transition-colors bg-black/50 rounded-full p-1"
                 onClick={() => setSelectedVideo(null)}
               >
                 <X size={24} />
               </button>
-              
+
               <div className="relative aspect-video">
-                <iframe 
-                  src={getEmbedUrl(selectedVideo.videoUrl)} 
-                  title={selectedVideo.title} 
+                <iframe
+                  src={getEmbedUrl(selectedVideo.video_url)}
+                  title={selectedVideo.title}
                   className="absolute inset-0 w-full h-full rounded-lg"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
               </div>
-              
+
               <div className="p-4">
-                <h3 className="text-xl font-bold text-gold-300 dark:text-gold-300 light:text-gold-600">{selectedVideo.title}</h3>
-                <p className="text-white dark:text-white light:text-gray-800 text-sm mt-2">{selectedVideo.description}</p>
+                <h3 className="text-xl font-bold text-gold-600 dark:text-gold-300">{selectedVideo.title}</h3>
+                {selectedVideo.description && <p className="text-foreground/90 text-sm mt-2">{selectedVideo.description}</p>}
               </div>
             </div>
           </div>

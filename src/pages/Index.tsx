@@ -10,6 +10,8 @@ import VideosSection from '@/components/VideosSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { SEO } from '@/components/SEO';
+import { HomeStructuredData } from '@/components/StructuredData';
 
 const Index = () => {
   // Smooth scroll to section when clicking on navigation links
@@ -77,24 +79,35 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black dark:bg-black light:bg-white text-white dark:text-white light:text-gray-900 overflow-hidden">
+      <SEO
+        fullTitle="DIGiTHOM | Agence de Design Graphique & Branding au Bénin"
+        description="DIGiTHOM est une agence de design graphique, branding et communication basée au Bénin. Création de logos, chartes graphiques, web design, impression et formations depuis 2020."
+        url="https://digithom.com/"
+        keywords="design graphique Bénin, branding Afrique, agence communication Cotonou, création logo Bénin, charte graphique, web design, impression, formation design"
+      />
+      <HomeStructuredData />
       <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <FormationsSection />
-      <PortfolioSection />
-      <VideosSection />
-      <TestimonialsSection />
-      <ContactSection />
+
+      <main id="content">
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <FormationsSection />
+        <PortfolioSection />
+        <VideosSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </main>
+
       <Footer />
-      
+
       {/* Back to top button */}
       <button
         id="back-to-top"
         className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold-500 text-black flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-gold-400 z-50"
-        aria-label="Retour en haut"
+        aria-label="Retour en haut de la page"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="m18 15-6-6-6 6"/>
         </svg>
       </button>

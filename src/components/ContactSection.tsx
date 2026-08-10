@@ -1,6 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useSingleton } from '@/hooks/useSingletonResource';
+import { useSubmitContactMessage } from '@/hooks/useContactMessages';
+import type { SiteSettingsRow } from '@/integrations/supabase/types';
+
+export const DEFAULT_SITE_SETTINGS: SiteSettingsRow = {
+  id: 1,
+  company_name: 'DIGiTHOM',
+  tagline: "Designer, c'est dessiner à dessein.",
+  footer_description: 'Des solutions créatives sur mesure pour transformer vos idées en expériences visuelles mémorables qui captivent votre audience.',
+  logo_url: '/lovable-uploads/1f24d38b-a1c7-4a48-86f2-df32e549aa59.png',
+  email: 'digithom229@gmail.com',
+  phone_display: '+229 01 41 51 53 03',
+  phone_link: '+2290141515303',
+  address: 'Abomey-Calavi, Bénin',
+  address_map_url: 'https://maps.google.com/?q=Abomey-Calavi,Benin',
+  hours_weekdays: '9:00 - 18:00',
+  hours_saturday: '10:00 - 15:00',
+  hours_sunday: 'Fermé',
+  facebook_url: '#',
+  tiktok_url: '#',
+  instagram_url: '#',
+  linkedin_url: '#',
+  updated_at: '',
+};
 
 // Composant TikTokIcon personnalisé
 const TikTokIcon = ({ size = 24, className = "" }) => (
@@ -21,14 +45,17 @@ const TikTokIcon = ({ size = 24, className = "" }) => (
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const { data } = useSingleton('site_settings');
+  const settings = data ?? DEFAULT_SITE_SETTINGS;
+  const { mutate: submitMessage, isPending: isSubmitting } = useSubmitContactMessage();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -56,79 +83,81 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Message envoyé!",
-        description: "Nous vous répondrons dans les plus brefs délais.",
-        variant: "default",
-      });
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    }, 1000);
+    if (isSubmitting) return;
+
+    submitMessage(formData, {
+      onSuccess: () => {
+        toast({
+          title: "Message envoyé!",
+          description: "Nous vous répondrons dans les plus brefs délais.",
+          variant: "default",
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      },
+      onError: () => {
+        toast({
+          title: "Échec de l'envoi",
+          description: "Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.",
+          variant: "destructive",
+        });
+      },
+    });
   };
-  
+
   const contactInfo = [
     {
       icon: <Mail size={20} className="text-gold-500" />,
       title: 'Email',
-      value: 'digithom229@gmail.com',
-      link: 'mailto:digithom229@gmail.com'
+      value: settings.email,
+      link: `mailto:${settings.email}`
     },
     {
       icon: <Phone size={20} className="text-gold-500" />,
       title: 'Téléphone',
-      value: '+229 01 41 51 53 03',
-      link: 'tel:+2290141515303'
+      value: settings.phone_display,
+      link: `tel:${settings.phone_link}`
     },
     {
       icon: <MapPin size={20} className="text-gold-500" />,
       title: 'Adresse',
-      value: 'Abomey-Calavi, Bénin',
-      link: 'https://maps.google.com/?q=Abomey-Calavi,Benin'
+      value: settings.address,
+      link: settings.address_map_url || '#'
     }
   ];
-  
+
   const socialLinks = [
-    { icon: <Facebook size={18} />, name: 'Facebook', link: '#' },
-    { icon: <TikTokIcon size={18} />, name: 'TikTok', link: '#' },
-    { icon: <Instagram size={18} />, name: 'Instagram', link: '#' },
-    { icon: <Linkedin size={18} />, name: 'LinkedIn', link: '#' }   
+    { icon: <Facebook size={18} />, name: 'Facebook', link: settings.facebook_url || '#' },
+    { icon: <TikTokIcon size={18} />, name: 'TikTok', link: settings.tiktok_url || '#' },
+    { icon: <Instagram size={18} />, name: 'Instagram', link: settings.instagram_url || '#' },
+    { icon: <Linkedin size={18} />, name: 'LinkedIn', link: settings.linkedin_url || '#' }
   ];
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
+    <section id="contact" className="py-20 relative overflow-hidden bg-background">
       {/* Decorative elements */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500/5 rounded-full filter blur-3xl"></div>
-      
+
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="animate-on-scroll opacity-0 text-3xl md:text-4xl font-bold mb-4">
             <span className="gold-gradient-text">Contactez-Nous</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-gold-300 to-gold-600 mx-auto mb-6"></div>
-          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-white">
+          <p className="animate-on-scroll opacity-0 max-w-2xl mx-auto text-foreground/90">
             Discutons de votre projet et voyons comment nous pouvons vous aider à le concrétiser.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-12">
           {/* Left side - Form */}
           <div className="animate-on-scroll opacity-0">
             <div className="glass-panel p-6 md:p-8 rounded-xl">
-              <h3 className="text-xl font-bold text-gold-300 mb-6">Envoyez-nous un message</h3>
-              
+              <h3 className="text-xl font-bold text-gold-600 dark:text-gold-300 mb-6">Envoyez-nous un message</h3>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-gold-400 text-sm">
+                  <label htmlFor="name" className="text-gold-600 dark:text-gold-400 font-semibold text-sm">
                     Nom Complet
                   </label>
                   <input
@@ -138,12 +167,13 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
+                    disabled={isSubmitting}
+                    className="w-full bg-input border border-border rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-foreground disabled:opacity-60"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-gold-400 text-sm">
+                  <label htmlFor="email" className="text-gold-600 dark:text-gold-400 font-semibold text-sm">
                     Email
                   </label>
                   <input
@@ -153,27 +183,13 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
+                    disabled={isSubmitting}
+                    className="w-full bg-input border border-border rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-foreground disabled:opacity-60"
                   />
                 </div>
-                
-                {/* <div className="space-y-2">
-                  <label htmlFor="subject" className="text-gold-400 text-sm">
-                    Objet
-                  </label>
-                  <input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white"
-                  />
-                </div> */}
-                
+
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-gold-400 text-sm">
+                  <label htmlFor="message" className="text-gold-600 dark:text-gold-400 font-semibold text-sm">
                     Message
                   </label>
                   <textarea
@@ -182,18 +198,22 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
-                    className="w-full bg-muted border border-gold-800 rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-white resize-none"
+                    className="w-full bg-input border border-border rounded-md px-4 py-2 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors text-foreground resize-none disabled:opacity-60"
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="gold-button text-white w-full flex items-center justify-center gap-2"
+                  className="gold-button text-black font-semibold w-full flex items-center justify-center gap-2 disabled:opacity-70"
                 >
                   {isSubmitting ? (
-                    'Envoi en cours...'
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>Envoi en cours...</span>
+                    </>
                   ) : (
                     <>
                       <span>Envoyer</span>
@@ -204,32 +224,32 @@ const ContactSection = () => {
               </form>
             </div>
           </div>
-          
+
           {/* Right side - Contact info */}
           <div className="animate-on-scroll opacity-0 flex flex-col space-y-8">
             <div className="glass-panel p-6 md:p-8 rounded-xl">
-              <h3 className="text-xl font-bold text-gold-300 mb-6">Informations de Contact</h3>
-              
+              <h3 className="text-xl font-bold text-gold-600 dark:text-gold-300 mb-6">Informations de Contact</h3>
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <a 
+                  <a
                     key={index}
                     href={info.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-4 hover:bg-gold-500/5 p-3 rounded-md transition-colors"
+                    className="flex items-start gap-4 hover:bg-gold-500/10 p-3 rounded-md transition-colors"
                   >
-                    <div className="bg-muted p-3 rounded-full">{info.icon}</div>
+                    <div className="bg-gold-500/10 p-3 rounded-full">{info.icon}</div>
                     <div>
-                      <h4 className="text-gold-400 font-medium">{info.title}</h4>
-                      <p className="text-white">{info.value}</p>
+                      <h4 className="text-gold-600 dark:text-gold-400 font-semibold">{info.title}</h4>
+                      <p className="text-foreground font-medium">{info.value}</p>
                     </div>
                   </a>
                 ))}
               </div>
-              
+
               <div className="mt-8">
-                <h4 className="text-gold-300 font-medium mb-4">Suivez-nous</h4>
+                <h4 className="text-gold-600 dark:text-gold-300 font-bold mb-4">Suivez-nous</h4>
                 <div className="flex gap-4">
                   {socialLinks.map((social, index) => (
                     <a
@@ -237,7 +257,7 @@ const ContactSection = () => {
                       href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-muted hover:bg-gold-500/20 w-10 h-10 rounded-full flex items-center justify-center text-gold-400 hover:text-gold-300 transition-all duration-300 hover:scale-110"
+                      className="bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 w-10 h-10 rounded-full flex items-center justify-center text-gold-600 dark:text-gold-400 transition-all duration-300 hover:scale-110"
                       aria-label={social.name}
                     >
                       {social.icon}
@@ -246,27 +266,27 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="glass-panel p-6 md:p-8 rounded-xl flex-1 flex flex-col">
-              <h3 className="text-xl font-bold text-gold-300 mb-6">Horaires d'Ouverture</h3>
-              
+              <h3 className="text-xl font-bold text-gold-600 dark:text-gold-300 mb-6">Horaires d'Ouverture</h3>
+
               <div className="space-y-3 flex-1">
-                <div className="flex justify-between">
-                  <span className="text-gold-400">Lundi - Vendredi</span>
-                  <span className="text-white">9:00 - 18:00</span>
+                <div className="flex justify-between border-b border-border/40 pb-2">
+                  <span className="text-gold-600 dark:text-gold-400 font-medium">Lundi - Vendredi</span>
+                  <span className="text-foreground font-medium">{settings.hours_weekdays}</span>
+                </div>
+                <div className="flex justify-between border-b border-border/40 pb-2">
+                  <span className="text-gold-600 dark:text-gold-400 font-medium">Samedi</span>
+                  <span className="text-foreground font-medium">{settings.hours_saturday}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gold-400">Samedi</span>
-                  <span className="text-white">10:00 - 15:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gold-400">Dimanche</span>
-                  <span className="text-white">Fermé</span>
+                  <span className="text-gold-600 dark:text-gold-400 font-medium">Dimanche</span>
+                  <span className="text-muted-foreground italic">{settings.hours_sunday}</span>
                 </div>
               </div>
-              
+
               <div className="mt-auto pt-6">
-                <p className="text-white/70 text-sm italic">
+                <p className="text-muted-foreground text-sm italic">
                   N'hésitez pas à nous contacter pour discuter de votre projet ou pour prendre rendez-vous.
                 </p>
               </div>
