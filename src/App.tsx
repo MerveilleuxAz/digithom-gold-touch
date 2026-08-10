@@ -33,7 +33,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <Analytics />
+          <Analytics debug={import.meta.env.DEV} />
           <BrowserRouter>
             <AuthProvider>
               <Routes>
