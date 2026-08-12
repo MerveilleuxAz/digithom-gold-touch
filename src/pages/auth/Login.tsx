@@ -12,7 +12,7 @@ import { SEO } from '@/components/SEO';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Login = () => {
-  const { session, isLoading: isSessionLoading, signIn } = useAuth();
+  const { session, isLoading: isSessionLoading, isAdmin, isAdminLoading, signIn, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,9 +22,49 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  if (!isSessionLoading && session) {
+  const isCheckingAccess = !isSessionLoading && session && isAdminLoading;
+
+  if (isCheckingAccess) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-gold-500" />
+      </div>
+    );
+  }
+
+  if (!isSessionLoading && session && !isAdminLoading && isAdmin) {
     const from = (location.state as { from?: string } | null)?.from ?? '/admin';
     return <Navigate to={from} replace />;
+  }
+
+  if (!isSessionLoading && session && !isAdminLoading && !isAdmin) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative transition-colors duration-300">
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
+        </div>
+        <div className="w-full max-w-md">
+          <Card className="border shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold">Accès refusé</CardTitle>
+              <CardDescription>
+                Ce compte ({session.user.email}) n'a pas les droits d'administration.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button className="w-full" variant="outline" onClick={() => signOut()}>
+                Se déconnecter
+              </Button>
+              <div className="text-center">
+                <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  ← Retour au site
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

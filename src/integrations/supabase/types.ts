@@ -59,6 +59,12 @@ export interface TestimonialRow extends ListRowBase {
   avatar_url: string | null;
 }
 
+export interface ProfileRow {
+  id: string;
+  is_admin: boolean;
+  created_at: string;
+}
+
 export interface ContactMessageRow {
   id: string;
   name: string;
@@ -186,6 +192,11 @@ export interface Database {
         Row: ContactMessageRow;
         Insert: InsertOf<ContactMessageRow, 'id' | 'is_read' | 'is_archived' | 'created_at'>;
         Update: Partial<ContactMessageRow>;
+      };
+      profiles: {
+        Row: ProfileRow;
+        Insert: Partial<ProfileRow>;
+        Update: Partial<ProfileRow>;
       };
     };
   };
